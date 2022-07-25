@@ -19,7 +19,7 @@ public class Repayment {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer repaymentid;
 	
-	@Column(name = "saving_acc_no")
+	@Column(name = "loan_account_id")
 	private Long accountNo;
 	
 	@Column(name="year")
