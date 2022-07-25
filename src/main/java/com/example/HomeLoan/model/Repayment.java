@@ -16,14 +16,14 @@ public class Repayment {
 	
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer repaymentid;
 	
 	@Column(name = "loan_account_id")
 	private Long accountNo;
 	
-	@Column(name="year")
-	private int year;
+	@Column(name="date")
+	private java.sql.Date date;
 	
 	@Column(name="emi")
 	private Double emi;

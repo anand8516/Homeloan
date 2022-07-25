@@ -25,7 +25,7 @@ public class LoanAccount {
 	
 	@Id
 	@Column(name = "loan_acc_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer loanAccId;
 	
 	@Column(name = "saving_acc_no")
