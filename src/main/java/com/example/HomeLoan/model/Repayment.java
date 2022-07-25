@@ -16,7 +16,7 @@ public class Repayment {
 	
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer repaymentid;
 	
 	@Column(name = "saving_acc_no")
