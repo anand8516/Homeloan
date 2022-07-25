@@ -21,7 +21,7 @@ public class SavingAccount {
 	
 	@Id
 	@Column(name = "sequence_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer sequenceId;
 		
 	// public acc no 

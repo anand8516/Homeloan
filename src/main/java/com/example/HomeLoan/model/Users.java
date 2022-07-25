@@ -22,8 +22,7 @@ public class Users {
 	
 	@Id
 	@Column(name = "user_id")
-    @SequenceGenerator(name="SEQ_GEN", sequenceName="SEQ_JUST_FOR_TEST", allocationSize=1)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_GEN")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer userId;	
 	
 	@Column(name="user_password")
