@@ -76,6 +76,8 @@ public class LoanRepaymentService {
 			obj.setOutstanding(outstanding);
 			obj.setInterest(mInterest);			
 			obj.setPrinciple(paidPrinciple);
+			obj.setPrinciple(paidPrinciple);
+			obj.setEmi(emi);
 			
 			
 			Date new_date = pesObj.addMonths(currdate,monthly_inc + i);
