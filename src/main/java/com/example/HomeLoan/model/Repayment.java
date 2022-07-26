@@ -1,5 +1,7 @@
 package com.example.HomeLoan.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,17 +18,14 @@ public class Repayment {
 	
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer repaymentid;
 	
 	@Column(name = "loan_account_id")
 	private Long accountNo;
 	
-	@Column(name="year")
-	private int year;
-
-	@Column(name="month")
-	private int month;
+	@Column(name="date")
+	private java.sql.Date date;
 	
 	@Column(name="emi")
 	private Double emi;
@@ -46,6 +45,28 @@ public class Repayment {
 	@Column(name="status")
 	private String status;
 
+
+
+
+	@Column(name="updated_at")
+	private Date updatedat;
+
+	public Repayment(Integer repaymentid, Long accountNo, java.sql.Date date, Double emi, Double principle,
+			Double interest, Double rate, Double outstanding, String status, Date updatedat) {
+		super();
+		this.repaymentid = repaymentid;
+		this.accountNo = accountNo;
+		this.date = date;
+		this.emi = emi;
+		this.principle = principle;
+		this.interest = interest;
+		this.rate = rate;
+		this.outstanding = outstanding;
+		this.status = status;
+
+		this.updatedat = updatedat;
+	}
+
 	public Integer getRepaymentid() {
 		return repaymentid;
 	}
@@ -62,20 +83,12 @@ public class Repayment {
 		this.accountNo = accountNo;
 	}
 
-	public int getYear() {
-		return year;
+	public java.sql.Date getDate() {
+		return date;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
-	}
-
-	public int getMonth() {
-		return month;
-	}
-
-	public void setMonth(int month) {
-		this.month = month;
+	public void setDate(java.sql.Date date) {
+		this.date = date;
 	}
 
 	public Double getEmi() {
@@ -126,19 +139,14 @@ public class Repayment {
 		this.status = status;
 	}
 
-	@Override
-	public String toString() {
-		return "Repayment{" +
-				"repaymentid=" + repaymentid +
-				", accountNo=" + accountNo +
-				", year=" + year +
-				", month=" + month +
-				", emi=" + emi +
-				", principle=" + principle +
-				", interest=" + interest +
-				", rate=" + rate +
-				", outstanding=" + outstanding +
-				", status='" + status + '\'' +
-				'}';
+
+
+	public Date getUpdatedat() {
+		return updatedat;
 	}
+
+	public void setUpdatedat(Date updatedat) {
+		this.updatedat = updatedat;
+	}
+
 }

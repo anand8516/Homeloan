@@ -12,16 +12,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "savingaccount")
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class SavingAccount {
 	
 	@Id
 	@Column(name = "sequence_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer sequenceId;
 		
 	// public acc no 
@@ -35,6 +40,38 @@ public class SavingAccount {
 	
 	@Column(name="curr_balance")
 	private Double balance;
+
+	public Integer getSequenceId() {
+		return sequenceId;
+	}
+
+	public void setSequenceId(Integer sequenceId) {
+		this.sequenceId = sequenceId;
+	}
+
+	public Long getAccountno() {
+		return accountno;
+	}
+
+	public void setAccountno(Long accountno) {
+		this.accountno = accountno;
+	}
+
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
+	public Double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
 	
 
 }

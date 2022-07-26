@@ -23,5 +23,4 @@ public class HomeLoanApplication {
         logger.fatal("Damn! Fatal error. Please fix me.");
 		SpringApplication.run(HomeLoanApplication.class, args);
 	}
-
 }
