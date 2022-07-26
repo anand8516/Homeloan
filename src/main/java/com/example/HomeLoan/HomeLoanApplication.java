@@ -7,12 +7,15 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 
 import com.example.HomeLoan.service.LoanRepaymentService;
 import com.example.HomeLoan.service.RepaymentService;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 
 import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
+@EnableSwagger2
 public class HomeLoanApplication {
 	
 	
@@ -21,6 +24,7 @@ public class HomeLoanApplication {
 							
         logger.info("Info log InSIde Home APP");
 		SpringApplication.run(HomeLoanApplication.class, args);
+
 //		updateRepayment
 //		LoanRepaymentService obj =  new LoanRepaymentService();
 //		obj.generateRepaymentSchedule(new Date(),5000000, 7,20,0);
