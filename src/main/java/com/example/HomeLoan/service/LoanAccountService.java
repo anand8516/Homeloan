@@ -1,6 +1,9 @@
 package com.example.HomeLoan.service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -42,6 +45,9 @@ public class LoanAccountService {
 	
 	private final int batchSize = 30;
 	
+	@Autowired
+	private EmailService emailService;
+
 	
 	public LoanAccount saveAppliedLoan( LoanAccount obj) {
 
@@ -69,6 +75,12 @@ public class LoanAccountService {
 		loanAcc.setStatus("Approved");
 		loanAcc = loanAccrepo.save(loanAcc);
 		populatePaymentDBforNewUser(loanAcc);
+		try {
+			emailService.sendEmail("piyushjha65@gmail.com", "You have accepted loan", "Loan Accepted", "batchpb2a@gmail.com");
+		} catch (UnsupportedEncodingException | MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return loanAcc;
 		
 	}
