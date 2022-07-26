@@ -1,6 +1,9 @@
 package com.example.HomeLoan.service;
 
 import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.HomeLoan.HomeLoanApplication;
+
 import com.example.HomeLoan.model.LoanAccount;
 import com.example.HomeLoan.model.Repayment;
 import com.example.HomeLoan.repo.LoanAccountRepository;
@@ -43,6 +46,16 @@ public class LoanRepaymentService {
 	
 	List<Repayment> repaySchedule = new ArrayList<Repayment>();
 	
+	public Date addMonths(Date date,int months) {		
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+		String s = DATE_FORMAT.format(date);	
+		LocalDate localdate = LocalDate.parse(s);
+		LocalDate newDate = localdate.plusMonths(months); 		
+		System.out.println("New Date : "+newDate);
+		Date date_new = Date.from(newDate.atStartOfDay(ZoneId.systemDefault()).toInstant());		
+		return date_new;	    
+	}
+	
 	public List<Repayment> generateRepaymentSchedule(Date currdate,double principleAmount, double interestRate,double year,double month) {		
 		LoanRepaymentService pesObj = new LoanRepaymentService();
 		logger.info("Entere generateRepaymentSchedule");
@@ -51,30 +64,32 @@ public class LoanRepaymentService {
 		double t = (year * 12) + month;
 		double emi = pesObj.calMonthlyEmi(p,r,t);		//emi = (p*r*Math.pow(1+r,t))/(Math.pow(1+r,t)-1);
 		double outstanding = p;				
-//		List<ArrayList<Double>> listOfLists = new ArrayList<ArrayList<Double>> ();
+
+		
 		for(int i=0;i<t;i++){
 			double mInterest = pesObj.calInterest(outstanding,r) ;//rate is monthly //= outstanding * r;			
 			double paidPrinciple = pesObj.calPaidPrinciple(emi,mInterest);//emi - mInterest;			
 			outstanding = outstanding - paidPrinciple;				
-//			ArrayList<Double> t = new ArrayList<>();
-//			temp.add(mInterest);
-//			temp.add(paidPrinciple);
-//			temp.add(balance);	
+
 			Repayment obj = new Repayment();
 			int monthly_inc = 1 ;
 			obj.setOutstanding(outstanding);
 			obj.setInterest(mInterest);			
 			obj.setPrinciple(paidPrinciple);
+<<<<<<< HEAD
+=======
+			obj.setPrinciple(paidPrinciple);
+>>>>>>> a6e08f3c335c9e900ecfed9fcd692eb5da478a9f
 			obj.setEmi(emi);
 			
-			obj.setDate(currdate);
-//			obj.setDate(currdate + monthly_inc);
-//			yyyy-mm-dd
-			logger.info(currdate);
+			
+			Date new_date = pesObj.addMonths(currdate,monthly_inc + i);
+			obj.setDate(new_date);
+			
+			logger.info(obj.getDate());
 			
 			repaySchedule.add(obj);		
-			}	
-			
+			}				
 			return repaySchedule;
 		}
 	

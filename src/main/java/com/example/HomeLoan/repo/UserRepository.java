@@ -9,4 +9,6 @@ import com.example.HomeLoan.model.Users;
 
 public interface UserRepository extends JpaRepository<Users, Integer>  {
 
+
+
 }
