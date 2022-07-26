@@ -2,7 +2,7 @@ package com.example.HomeLoan.controller;
 
 import com.example.HomeLoan.HomeLoanApplication;
 import com.example.HomeLoan.model.Repayment;
-import com.example.HomeLoan.service.PaymentService;
+import com.example.HomeLoan.service.RepaymentService;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ public class PaymentsController {
     private static final Logger logger= (Logger) LogManager.getLogger(PaymentsController.class);
 
     @Autowired
-    PaymentService paymentService;
+    RepaymentService paymentService;
 
     @GetMapping("/prepayment/{id}")
     public ResponseEntity<List<Repayment>> getTutorialById(@PathVariable("id") int id) {
@@ -32,16 +32,15 @@ public class PaymentsController {
     @PostMapping("/prepayment")
     public ResponseEntity<Double> updatePrepaymentDetails  (@RequestBody Double Amount)
     {
-        LocalDate currentDate= LocalDate.now();
-        int month=currentDate.getMonthValue();
-        int year=currentDate.getYear();
-        if(Amount<=(3*emi))//get emi from loan table
+
+        /*if(Amount<=(3*emi))//get emi from loan table
         {
             Logger.info("")
-        }
-        logger.info("Month:"+month);
-        Double EMI=paymentService.updateEMIDetails(Amount,month,year);
+        }*/
+       // logger.info("Month:"+month);
+        //Double EMI=paymentService.updateEMIDetails(Amount,month,year);
         //print repayment schedule function call
-        return new ResponseEntity<>(EMI, HttpStatus.OK);
+        //return new ResponseEntity<>(EMI, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
