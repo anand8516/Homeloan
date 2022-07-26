@@ -16,10 +16,21 @@ public class SavingAccountService {
 	public SavingAccount saveBalance(SavingAccount balance) {
 		return SavAccRepo.save(balance);	
 	}
+
+	public SavingAccount findAccountByUserId(int user_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	//public SavingAccount getProductbyuser (Users user) {
 	//	return SavAccRepo.findbyUser(user);	
 	//}
+	
+	public SavingAccount findAccountByUserId(Integer id) {
+		return SavAccRepo.findSavingAccountByUserid(id);
+	}
+	
+
 	
 	
 }

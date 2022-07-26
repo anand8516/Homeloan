@@ -1,5 +1,7 @@
 package com.example.HomeLoan.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,9 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 @Data
 @Entity
 @Table(name = "repayment")
@@ -26,101 +26,127 @@ public class Repayment {
 	
 	@Column(name="date")
 	private java.sql.Date date;
-		
+	
 	@Column(name="emi")
 	private Double emi;
 	
 	@Column(name="principle")
-//	Paid this month
-	private Double principle;	   
-    
+	private Double principle;
 	
 	@Column(name="interest")
-//	Paid this month
 	private Double interest;
-	
 
 	@Column(name="rate")
 	private Double rate;
 	
-	
 	@Column(name="outstanding")
-//	Balance loan
 	private Double outstanding;
 	
-		
 	@Column(name="status")
 	private String status;
 	
-	
-	private List<Repayment> paymentList = new ArrayList<Repayment>();
-	
-	
-	public void setRepaymentid(int repaymentid) {
-        this.repaymentid =  repaymentid;
-    }
-    public Integer getRepaymentid() {
-        return this.repaymentid;
-    } 
-    
-    public void setloan_account_id(Long accountNo) {
-        this.accountNo =  accountNo;
-    }
-    public Long getloan_account_id() {
-        return this.accountNo;
-    } 
-    public void setdate(java.sql.Date date) {
-        this.date =  date;
-    }
-    public java.sql.Date getdate() {
-        return this.date;
-    } 
-    public void setemi(Double emi) {
-        this.emi =  emi;
-    }
-    public Double getemi() {
-        return this.emi;
-    }    
-    
-    public void setprinciple(Double principle) {
-        this.principle =  principle;
-    }
-    public Double getprinciple() {
-        return this.principle;
-    } 
-    public void setinterest(Double interest) {
-        this.interest =  interest;
-    }
-    public Double getinterest() {
-        return this.interest;
-    }     
-    public void setrate(Double rate) {
-        this.rate =  rate;
-    }
-    public Double getrate() {
-        return this.rate;
-    } 	
-    public void setoutstanding(Double outstanding) {
-        this.outstanding =  outstanding;
-    }
-    public Double getoutstanding() {
-        return this.outstanding;
-    }     
-    public void setstatus(String status) {
-        this.status =  status;
-    }
-    public String getstatus() {
-        return this.status;
-    } 
-    	
-   
-    public List<Repayment> getPaymentList() { return this.paymentList; }
-    public void setPaymentList(List<Repayment> paymentList) { this.paymentList = paymentList; }
-    public void addAllPayments(List<Repayment> paymentList) { this.paymentList.addAll(paymentList); }
 
-//    @Override
-//    public String toString()
-//    {
-//        return "[" + startDate + "," + initialBalance + "," + interestRate + "," + durationInMonths + "," + futureValue + "," + paymentType + "," + monthlyPayment + "]";
-//    }
+	
+
+	@Column(name="updated_at")
+	private Date updatedat;
+
+	public Repayment(Integer repaymentid, Long accountNo, java.sql.Date date, Double emi, Double principle,
+			Double interest, Double rate, Double outstanding, String status, Date updatedat) {
+		super();
+		this.repaymentid = repaymentid;
+		this.accountNo = accountNo;
+		this.date = date;
+		this.emi = emi;
+		this.principle = principle;
+		this.interest = interest;
+		this.rate = rate;
+		this.outstanding = outstanding;
+		this.status = status;
+
+		this.updatedat = updatedat;
+	}
+
+	public Integer getRepaymentid() {
+		return repaymentid;
+	}
+
+	public void setRepaymentid(Integer repaymentid) {
+		this.repaymentid = repaymentid;
+	}
+
+	public Long getAccountNo() {
+		return accountNo;
+	}
+
+	public void setAccountNo(Long accountNo) {
+		this.accountNo = accountNo;
+	}
+
+	public java.sql.Date getDate() {
+		return date;
+	}
+
+	public void setDate(java.sql.Date date) {
+		this.date = date;
+	}
+
+	public Double getEmi() {
+		return emi;
+	}
+
+	public void setEmi(Double emi) {
+		this.emi = emi;
+	}
+
+	public Double getPrinciple() {
+		return principle;
+	}
+
+	public void setPrinciple(Double principle) {
+		this.principle = principle;
+	}
+
+	public Double getInterest() {
+		return interest;
+	}
+
+	public void setInterest(Double interest) {
+		this.interest = interest;
+	}
+
+	public Double getRate() {
+		return rate;
+	}
+
+	public void setRate(Double rate) {
+		this.rate = rate;
+	}
+
+	public Double getOutstanding() {
+		return outstanding;
+	}
+
+	public void setOutstanding(Double outstanding) {
+		this.outstanding = outstanding;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+
+	public Date getUpdatedat() {
+		return updatedat;
+	}
+
+	public void setUpdatedat(Date updatedat) {
+		this.updatedat = updatedat;
+	}
+
 }
