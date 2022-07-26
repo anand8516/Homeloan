@@ -2,11 +2,23 @@ package com.example.HomeLoan.service;
 
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 
-@Service
-public class UserService {
+import com.example.HomeLoan.model.Users;
+
+
+
+public interface UserService {
+
+	public Users createUser(Users user);
+	
+	public Optional<Users> getUser(int userId);
+	
+	public String updateUser(Users user);
+	
+	public String deleteUser(int userId);
+	
+	public List<Users> getAllUser();
 
 }
