@@ -11,4 +11,6 @@ public interface LoanAccountRepository extends JpaRepository<LoanAccount, Intege
 	List<LoanAccount> findLoanAccountByAccountNo(Long accountNo);
 	
 	List<LoanAccount> findByLoanAccId(int loanAccId); 
+	
+	
 }
