@@ -40,6 +40,38 @@ public class SavingAccount {
 	
 	@Column(name="curr_balance")
 	private Double balance;
+
+	public Integer getSequenceId() {
+		return sequenceId;
+	}
+
+	public void setSequenceId(Integer sequenceId) {
+		this.sequenceId = sequenceId;
+	}
+
+	public Long getAccountno() {
+		return accountno;
+	}
+
+	public void setAccountno(Long accountno) {
+		this.accountno = accountno;
+	}
+
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
+	public Double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
 	
 
 }
