@@ -69,10 +69,11 @@ public class LoanRepaymentService {
 			obj.setDate(currdate);
 //			obj.setDate(currdate + monthly_inc);
 //			yyyy-mm-dd
+			logger.info(currdate);
 			
 			repaySchedule.add(obj);		
 			}	
-			logger.info(repaySchedule);
+			
 			return repaySchedule;
 		}
 	

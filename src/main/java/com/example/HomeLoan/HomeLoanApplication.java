@@ -23,13 +23,15 @@ public class HomeLoanApplication {
 	public static void main(String[] args) {
 		
 		
-		LoanRepaymentService obj = new LoanRepaymentService();
-		utility dj = new utility();
-		obj.generateRepaymentSchedule(dj.parseDate("2022-07-26"),5000000, 7, 10, 0);
+		
+		
 		
         logger.info("Info log");
 		SpringApplication.run(HomeLoanApplication.class, args);
 		
+		LoanRepaymentService obj = new LoanRepaymentService();
+		utility dj = new utility();
+		obj.generateRepaymentSchedule(dj.parseDate("2022-07-26"),5000000, 7, 10, 0);
 		
 	}
 }
