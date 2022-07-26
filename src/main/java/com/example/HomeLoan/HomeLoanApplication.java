@@ -5,9 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
+import com.example.HomeLoan.service.LoanRepaymentService;
 
-
-
+import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,13 +17,12 @@ public class HomeLoanApplication {
 	
 	private static final Logger logger = LogManager.getLogger(HomeLoanApplication.class);
 	public static void main(String[] args) {
-		
-		
-		
-		
-		
-        logger.info("Info log");
+							
+        logger.info("Info log InSIde Home APP");
 		SpringApplication.run(HomeLoanApplication.class, args);
+		
+		LoanRepaymentService obj =  new LoanRepaymentService();
+		obj.generateRepaymentSchedule(new Date(),5000000, 7,20,0);
 
 		
 	}
