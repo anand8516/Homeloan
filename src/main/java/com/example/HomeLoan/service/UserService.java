@@ -15,10 +15,13 @@ public interface UserService {
 	
 	public Optional<Users> getUser(int userId);
 	
-	public String updateUser(Users user);
+	public void updateUser(Users user);
 	
-	public String deleteUser(int userId);
 	
 	public List<Users> getAllUser();
+
+	public void deleteUser(Integer userId);
+
+
 
 }

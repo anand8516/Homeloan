@@ -22,10 +22,10 @@ public class Repayment {
 	private Integer repaymentid;
 	
 	@Column(name = "loan_account_id")
-	private Long accountNo;
+	private int accountNo;
 	
 	@Column(name="date")
-	private java.sql.Date date;
+	private Date date;
 	
 	@Column(name="emi")
 	private Double emi;
@@ -35,9 +35,6 @@ public class Repayment {
 	
 	@Column(name="interest")
 	private Double interest;
-
-	@Column(name="rate")
-	private Double rate;
 	
 	@Column(name="outstanding")
 	private Double outstanding;
@@ -46,12 +43,12 @@ public class Repayment {
 	private String status;
 
 
-
+	
 
 	@Column(name="updated_at")
 	private Date updatedat;
 
-	public Repayment(Integer repaymentid, Long accountNo, java.sql.Date date, Double emi, Double principle,
+	public Repayment(Integer repaymentid, int  accountNo, Date date, Double emi, Double principle,
 			Double interest, Double rate, Double outstanding, String status, Date updatedat) {
 		super();
 		this.repaymentid = repaymentid;
@@ -60,11 +57,13 @@ public class Repayment {
 		this.emi = emi;
 		this.principle = principle;
 		this.interest = interest;
-		this.rate = rate;
 		this.outstanding = outstanding;
 		this.status = status;
-
 		this.updatedat = updatedat;
+	}
+
+	public Repayment() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getRepaymentid() {
@@ -75,19 +74,19 @@ public class Repayment {
 		this.repaymentid = repaymentid;
 	}
 
-	public Long getAccountNo() {
+	public int getAccountNo() {
 		return accountNo;
 	}
 
-	public void setAccountNo(Long accountNo) {
+	public void setAccountNo(int accountNo) {
 		this.accountNo = accountNo;
 	}
 
-	public java.sql.Date getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(java.sql.Date date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -115,13 +114,6 @@ public class Repayment {
 		this.interest = interest;
 	}
 
-	public Double getRate() {
-		return rate;
-	}
-
-	public void setRate(Double rate) {
-		this.rate = rate;
-	}
 
 	public Double getOutstanding() {
 		return outstanding;
