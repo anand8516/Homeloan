@@ -42,7 +42,7 @@ public class LoanController {
 
 
 
-	@RequestMapping(value = {"/applyLoan","/approveLoan"}, method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = {"/applyLoan","/approveLoan"}, method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public ResponseEntity<Object> applyForLoan(@RequestBody LoanAccount loanAcc,HttpSession session) {
 		logger.info("createLoanAccount applyForLoan> "+loanAcc);
