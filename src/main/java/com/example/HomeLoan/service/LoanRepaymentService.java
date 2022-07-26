@@ -65,6 +65,7 @@ public class LoanRepaymentService {
 			obj.setOutstanding(outstanding);
 			obj.setInterest(mInterest);			
 			obj.setPrinciple(paidPrinciple);
+			obj.setEmi(emi);
 			
 			obj.setDate(currdate);
 //			obj.setDate(currdate + monthly_inc);
