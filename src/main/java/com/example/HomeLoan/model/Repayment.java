@@ -25,7 +25,7 @@ public class Repayment {
 	private Long accountNo;
 	
 	@Column(name="date")
-	private java.sql.Date date;
+	private Date date;
 	
 	@Column(name="emi")
 	private Double emi;
@@ -51,7 +51,7 @@ public class Repayment {
 	@Column(name="updated_at")
 	private Date updatedat;
 
-	public Repayment(Integer repaymentid, Long accountNo, java.sql.Date date, Double emi, Double principle,
+	public Repayment(Integer repaymentid, Long accountNo, Date date, Double emi, Double principle,
 			Double interest, Double rate, Double outstanding, String status, Date updatedat) {
 		super();
 		this.repaymentid = repaymentid;
@@ -65,6 +65,10 @@ public class Repayment {
 		this.status = status;
 
 		this.updatedat = updatedat;
+	}
+
+	public Repayment() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getRepaymentid() {
@@ -83,11 +87,11 @@ public class Repayment {
 		this.accountNo = accountNo;
 	}
 
-	public java.sql.Date getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(java.sql.Date date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
