@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.context.annotation.ComponentScan;
+
+@ComponentScan({"com.example.HomeLoan.service.PaymentService", "com.beta.ruleService"})
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
 public class HomeLoanApplication {
 
