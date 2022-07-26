@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.HomeLoan.model.AuthenticationDetails;
 import com.example.HomeLoan.model.Users;
 import com.example.HomeLoan.repo.UserRepository;
 
@@ -49,6 +50,20 @@ public class UserServiceImplementation implements UserService{
 		userRepository.deleteById(userId);
 		
 		
+	}
+
+	@Override
+	public String login(AuthenticationDetails authenticationDetails) {
+		// TODO Auto-generated method stub
+		Users user = userRepository.findByEmail(authenticationDetails.getEmailId());
+		
+		if(user != null) {
+			if(user.getPassword().equals(authenticationDetails.getPassword()))
+				return "user logged in and User ID is "+user.getUserId();
+			else
+				return "password did not match";
+		}
+		return "no such user found";
 	}
 
 	
