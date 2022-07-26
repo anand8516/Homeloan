@@ -43,7 +43,7 @@ public class LoanRepaymentController {
 		return loanservice.getLoanAccountById(id);
 	}
 	
-	@GetMapping("/loanndetails/export/{loanid}")
+	@GetMapping("/loanndetails/csvexport/{loanid}")
     public void exportToCSV(@PathVariable int loanid,HttpServletResponse response) throws IOException {
         response.setContentType("text/csv");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
