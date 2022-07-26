@@ -33,27 +33,27 @@ public class LoanRepaymentService {
 		return (principle*mothlyRateOfInterest*Math.pow(1+mothlyRateOfInterest,tenureInMonths))/(Math.pow(1+mothlyRateOfInterest,tenureInMonths)-1);
 	}
 	
+	@SuppressWarnings("null")
 	public void generateRepaymentSchedule(double principleAmount, double interestRate,double tenure) {		
 		LoanRepaymentService pesObj = new LoanRepaymentService();
-		Repayment obj = new Repayment();
+		Repayment obj = null;
 		double p = principleAmount;
 		double r = interestRate/12;
 		double t = tenure * 12;
-		double emi = pesObj.calMonthlyEmi(p,r,t);		
-//		emi = (p*r*Math.pow(1+r,t))/(Math.pow(1+r,t)-1);
+		double emi = pesObj.calMonthlyEmi(p,r,t);		//emi = (p*r*Math.pow(1+r,t))/(Math.pow(1+r,t)-1);
 		double outstanding = p;				
 //		List<ArrayList<Double>> listOfLists = new ArrayList<ArrayList<Double>> ();
 		for(int i=0;i<t;i++){
 			double mInterest = pesObj.calInterest(outstanding,r) ;//rate is monthly //= outstanding * r;			
 			double paidPrinciple = pesObj.calPaidPrinciple(emi,mInterest);//emi - mInterest;			
 			outstanding = outstanding - paidPrinciple;				
-//			ArrayList<Double> temp = new ArrayList<>();
+//			ArrayList<Double> t = new ArrayList<>();
 //			temp.add(mInterest);
 //			temp.add(paidPrinciple);
 //			temp.add(balance);			
-			obj.setinterest(mInterest);
-			obj.setoutstanding(outstanding);
-			obj.setprinciple(paidPrinciple);
+			obj.setInterest(mInterest);
+			obj.setOutstanding(outstanding);
+			obj.setPrinciple(paidPrinciple);
 			repaySchedule.add(obj);			
 			}	
 		}
