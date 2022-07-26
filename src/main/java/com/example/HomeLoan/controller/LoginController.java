@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.HomeLoan.model.AuthenticationDetails;
 import com.example.HomeLoan.model.Users;
 import com.example.HomeLoan.service.UserService;
 
@@ -36,6 +37,12 @@ public class LoginController {
 	public Optional<Users> getUser(@Valid @PathVariable int userId) {
 		
 		return userService.getUser(userId);
+	}
+	
+	@GetMapping(value = "api/loginUser")
+	public String loginUser(@RequestBody AuthenticationDetails authenticationDetails){
+		
+		return userService.login(authenticationDetails);
 	}
 	
 	@PutMapping(value="/Users/{userId}")
