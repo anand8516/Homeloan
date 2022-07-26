@@ -29,21 +29,31 @@ public class UserServiceImplementation implements UserService{
 	}
 
 	@Override
-	public String updateUser(Users user) {
+	public void updateUser(Users user) {
 		// TODO Auto-generated method stub
-		return null;
+	    userRepository.save(user);
 	}
 
-	@Override
-	public String deleteUser(int userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public List<Users> getAllUser() {
 		// TODO Auto-generated method stub
 		return userRepository.findAll();
 	}
+
+	@Override
+	public void deleteUser(Integer userId) {
+		// TODO Auto-generated method stub
+		
+		userRepository.deleteById(userId);
+		
+		
+	}
+
+	
+
+	
+	
 
 }

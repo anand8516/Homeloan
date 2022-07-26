@@ -29,8 +29,6 @@ public class LoanRepaymentService {
 //	@Autowired
 //	private LoanRepayScheduleRepository loanScheduleRepo;
 	
-	@Autowired
-	private utility dateUtility;
 	
 	public List<LoanAccount> getLoanAccounts() {
 		return loanaccountRepo.findAll();		
@@ -88,8 +86,9 @@ public class LoanRepaymentService {
 
 			Repayment obj = new Repayment();
 			int monthly_inc = 1 ;
+			
 			obj.setOutstanding(outstanding);
-			obj.setInterest(mInterest);						
+			obj.setInterest(mInterest);			
 			obj.setPrinciple(paidPrinciple);
 			obj.setEmi(emi);
 			
