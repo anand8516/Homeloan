@@ -18,6 +18,7 @@ import com.example.HomeLoan.model.Repayment;
 import com.example.HomeLoan.repo.LoanAccountRepository;
 //import com.example.HomeLoan.repo.LoanRepayScheduleRepository;
 //import com.example.HomeLoan.repo.LoanScheduleRepository;
+import com.example.HomeLoan.repo.RepaymentRepository;
 
 @Service
 public class LoanRepaymentService {
@@ -26,22 +27,24 @@ public class LoanRepaymentService {
 	@Autowired
 	private LoanAccountRepository loanaccountRepo;
 	
-//	@Autowired
-//	private LoanRepayScheduleRepository loanScheduleRepo;
+	@Autowired
+	private RepaymentRepository loanRepaymentRepo;
 	
 	
 	public List<LoanAccount> getLoanAccounts() {
 		return loanaccountRepo.findAll();		
 	}
 	
-	public LoanAccount getLoanAccountById(int LoanId) {
+	
+	
+	public LoanAccount getLoanAccountById(int id) {
 //		LoanAccount LoanAccountdetails = loanaccountRepo.findById(LoanId);		
-		return loanaccountRepo.findByLoanAccId(LoanId);
+		return loanaccountRepo.findByLoanAccId(id);
 	}
 	
-//	public List<Repayment> getLoanSchedulebyID(long LoanId) {		
-//		return loanScheduleRepo.findByLoanId(LoanId);
-//	}
+	public List<Repayment> getLoanSchedulebyID(int LoanId) {		
+		return loanRepaymentRepo.findRepaymentDetailsByAccountNo(LoanId);
+	}
 		
 	public double calInterest(double outstanding,double mothlyRateOfInterest) {		
 		return outstanding * mothlyRateOfInterest;
@@ -96,7 +99,7 @@ public class LoanRepaymentService {
 			Date new_date = pesObj.addMonths(currdate,monthly_inc + i);
 			obj.setDate(new_date);
 			
-			logger.info(emi+ " | " +mInterest + " | " + paidPrinciple + " | " +outstanding);
+//			logger.info(emi+ " | " +mInterest + " | " + paidPrinciple + " | " +outstanding);
 			
 			repaySchedule.add(obj);		
 			}				
