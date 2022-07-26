@@ -13,24 +13,18 @@ public class SavingAccountService {
 	@Autowired
 	private SavingAccountRepositiory SavAccRepo;
 	
-	public SavingAccount saveBalance(SavingAccount balance) {
-		return SavAccRepo.save(balance);	
-	}
-
-	public SavingAccount findAccountByUserId(int user_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public SavingAccount saveBalance(SavingAccount bal) {
+		return SavAccRepo.save(bal);	
 	}
 	
-	//public SavingAccount getProductbyuser (Users user) {
-	//	return SavAccRepo.findbyUser(user);	
-	//}
-	
-	public SavingAccount findAccountByUserId(Integer id) {
+	public SavingAccount findAccountByUserId(int id) {
 		return SavAccRepo.findSavingAccountByUserid(id);
 	}
-	
 
-	
-	
+	//Count of rows code
+	//public SavingAccount getAccountno(int id) {
+	//	String count=(String) SavAccRepo.countofSA(userid);
+	//	long itr=SavAccRepo.counByRecords(userid);
+	//}
+
 }
