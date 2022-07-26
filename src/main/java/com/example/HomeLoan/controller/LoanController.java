@@ -57,7 +57,8 @@ public class LoanController {
 			body.put("Loan Acc", acc);
 			return new ResponseEntity<>(body, HttpStatus.OK);
 		}
-		else {
+		else
+		{
 			double eligibleAmt = loanAccService.calculateEligibleLoanAmt(salary);
 			loanAcc.setAmount(eligibleAmt);
 			body.put("status","Pending");

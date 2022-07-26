@@ -69,17 +69,13 @@ public class LoanRepaymentService {
 		for(int i=0;i<t;i++){
 			double mInterest = pesObj.calInterest(outstanding,r) ;//rate is monthly //= outstanding * r;			
 			double paidPrinciple = pesObj.calPaidPrinciple(emi,mInterest);//emi - mInterest;			
-			outstanding = outstanding - paidPrinciple;				
+			outstanding = outstanding - emi;				
 
 			Repayment obj = new Repayment();
 			int monthly_inc = 1 ;
 			obj.setOutstanding(outstanding);
 			obj.setInterest(mInterest);			
 			obj.setPrinciple(paidPrinciple);
-<<<<<<< HEAD
-=======
-			obj.setPrinciple(paidPrinciple);
->>>>>>> a6e08f3c335c9e900ecfed9fcd692eb5da478a9f
 			obj.setEmi(emi);
 			
 			
