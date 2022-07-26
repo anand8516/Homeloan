@@ -10,7 +10,7 @@ import com.example.HomeLoan.model.LoanAccount;
 public interface LoanAccountRepository extends JpaRepository<LoanAccount, Integer> {
 	
 	List<LoanAccount> findLoanAccountByAccountNo(Long accountNo);
-	
 	LoanAccount findByLoanAccId(int loanAccId); 
 
 }
+

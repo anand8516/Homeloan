@@ -42,7 +42,7 @@ public class LoanController {
 
 
 
-	@RequestMapping(value = {"/applyLoan","/approveLoan"}, method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE })
+	@RequestMapping(value = {"/applyLoan","/approveLoan"}, method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public ResponseEntity<Object> applyForLoan(@RequestBody LoanAccount loanAcc,HttpSession session) {
 		logger.info("createLoanAccount applyForLoan> "+loanAcc);
@@ -57,7 +57,8 @@ public class LoanController {
 			body.put("Loan Acc", acc);
 			return new ResponseEntity<>(body, HttpStatus.OK);
 		}
-		else {
+		else
+		{
 			double eligibleAmt = loanAccService.calculateEligibleLoanAmt(salary);
 			loanAcc.setAmount(eligibleAmt);
 			body.put("status","Pending");

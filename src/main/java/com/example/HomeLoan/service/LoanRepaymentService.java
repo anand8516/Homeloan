@@ -16,21 +16,35 @@ import org.springframework.stereotype.Service;
 import com.example.HomeLoan.model.LoanAccount;
 import com.example.HomeLoan.model.Repayment;
 import com.example.HomeLoan.repo.LoanAccountRepository;
+//import com.example.HomeLoan.repo.LoanRepayScheduleRepository;
+//import com.example.HomeLoan.repo.LoanScheduleRepository;
+import com.example.HomeLoan.repo.RepaymentRepository;
 
 @Service
 public class LoanRepaymentService {
 	private static final Logger logger = LogManager.getLogger(LoanRepaymentService.class);
-	@Autowired
-	private LoanAccountRepository repo;
 	
 	@Autowired
-	private utility dateUtility;
-		
-	public LoanAccount getLoanAccountById(int LoanId) {
-		return repo.findByLoanAccId(LoanId);		
+	private LoanAccountRepository loanaccountRepo;
+	
+	@Autowired
+	private RepaymentRepository loanRepaymentRepo;
+	
+	
+	public List<LoanAccount> getLoanAccounts() {
+		return loanaccountRepo.findAll();		
 	}
 	
 	
+	
+	public LoanAccount getLoanAccountById(int id) {
+//		LoanAccount LoanAccountdetails = loanaccountRepo.findById(LoanId);		
+		return loanaccountRepo.findByLoanAccId(id);
+	}
+	
+	public List<Repayment> getLoanSchedulebyID(int LoanId) {		
+		return loanRepaymentRepo.findRepaymentDetailsByAccountNo(LoanId);
+	}
 		
 	public double calInterest(double outstanding,double mothlyRateOfInterest) {		
 		return outstanding * mothlyRateOfInterest;
@@ -56,26 +70,28 @@ public class LoanRepaymentService {
 		return date_new;	    
 	}
 	
+	
 	public List<Repayment> generateRepaymentSchedule(Date currdate,double principleAmount, double interestRate,double year,double month) {		
 		LoanRepaymentService pesObj = new LoanRepaymentService();
 		logger.info("Entere generateRepaymentSchedule");
 		double p = principleAmount;
-		double r = interestRate/12;
+		double r = interestRate*0.01/12;
 		double t = (year * 12) + month;
 		double emi = pesObj.calMonthlyEmi(p,r,t);		//emi = (p*r*Math.pow(1+r,t))/(Math.pow(1+r,t)-1);
+		
 		double outstanding = p;				
 
 		
 		for(int i=0;i<t;i++){
 			double mInterest = pesObj.calInterest(outstanding,r) ;//rate is monthly //= outstanding * r;			
 			double paidPrinciple = pesObj.calPaidPrinciple(emi,mInterest);//emi - mInterest;			
-			outstanding = outstanding - paidPrinciple;				
+			outstanding = outstanding - emi;				
 
 			Repayment obj = new Repayment();
 			int monthly_inc = 1 ;
+			
 			obj.setOutstanding(outstanding);
 			obj.setInterest(mInterest);			
-			obj.setPrinciple(paidPrinciple);
 			obj.setPrinciple(paidPrinciple);
 			obj.setEmi(emi);
 			
@@ -83,7 +99,7 @@ public class LoanRepaymentService {
 			Date new_date = pesObj.addMonths(currdate,monthly_inc + i);
 			obj.setDate(new_date);
 			
-			logger.info(obj.getDate());
+//			logger.info(emi+ " | " +mInterest + " | " + paidPrinciple + " | " +outstanding);
 			
 			repaySchedule.add(obj);		
 			}				
