@@ -22,23 +22,8 @@ public class Users {
 	
 	@Id
 	@Column(name = "user_id")
-//<<<<<<< HEAD
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	private Integer userId;
-//	
-//	@Column(name="user_name",unique = true)
-//	private String username;
-//	
-//	@Column(name="user_firstname")
-//	private String firstname;
-//	
-//	@Column(name="user_lastname")
-//	private String lastname;
-
-    @SequenceGenerator(name="SEQ_GEN", sequenceName="SEQ_JUST_FOR_TEST", allocationSize=1)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_GEN")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer userId;	
-
 	
 	@Column(name="user_password")
 	private String password;
@@ -51,4 +36,3 @@ public class Users {
 	
 	
 }
-
