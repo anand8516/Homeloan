@@ -3,7 +3,7 @@ package com.example.HomeLoan.controller;
 import java.util.List;
 import java.util.Optional;
 
-
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,25 +26,25 @@ public class LoginController {
 	UserService userService;
 	
 	@PostMapping(value="/Users")
-	public Users createUser(@RequestBody Users user) {
+	public Users createUser(@Valid @RequestBody Users user) {
 		
 		return userService.createUser(user);
 	}
 		
 	
 	@GetMapping(value = "api/getuser/{userId}")
-	public Optional<Users> getUser(@PathVariable int userId) {
+	public Optional<Users> getUser(@Valid @PathVariable int userId) {
 		
 		return userService.getUser(userId);
 	}
 	
 	@PutMapping(value="/Users/{userId}")
-	public void updateUser(@RequestBody Users user) {
+	public void updateUser(@Valid @RequestBody Users user) {
 		userService.updateUser(user);
 	}
 	
 	@DeleteMapping(value = "Delete/{userId}")
-	public String deleteUser(@PathVariable Integer userId)
+	public String deleteUser(@Valid @PathVariable Integer userId)
 	
 	{
 		

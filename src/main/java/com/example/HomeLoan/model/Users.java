@@ -6,11 +6,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Data
@@ -27,11 +33,17 @@ public class Users {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private int userId;	
 	
+	
 	@Column(name="user_password")
+	@NotEmpty
+	@Size(min=4 , max=10 , message="invalid password")
 	private String password;
 	
+	
 	@Column(name="user_email",unique = true)
+	@Email(message="invalid email")
 	private String email;
+	
 	
 	@Column(name="user_phone")
 	private long phone;
