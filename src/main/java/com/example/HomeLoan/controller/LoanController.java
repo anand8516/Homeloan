@@ -67,7 +67,7 @@ public class LoanController {
 	
 	@RequestMapping(value = {"/applyLoan","/approveLoan"}, method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
-	public ResponseEntity<Object> applyForLoan(@RequestBody @Valid  LoanAccount loanAcc,HttpSession session) {
+	public ResponseEntity<?> applyForLoan(@RequestBody @Valid  LoanAccount loanAcc,HttpSession session) {
 		int user_id = (int) session.getAttribute("user_id");
 		logger.info("createLoanAccount applyForLoan> "+loanAcc);
 		Map<String, Object> body = new LinkedHashMap<>();
@@ -94,7 +94,7 @@ public class LoanController {
 	
 	@RequestMapping(value = {"/viewloan/{loan_id}"}, method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
-	public ResponseEntity<Object> applyForLoan(@PathVariable int loan_id,HttpSession session) {
+	public ResponseEntity<?> applyForLoan(@PathVariable int loan_id,HttpSession session) {
 		int user_id = (int) session.getAttribute("user_id");
 		Map<String, Object> body = new LinkedHashMap<>();
 		LoanAccount loanAcc = loanAccService.getLoanDetails(loan_id);
