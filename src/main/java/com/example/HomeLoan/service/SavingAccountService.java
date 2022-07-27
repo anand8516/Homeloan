@@ -1,6 +1,8 @@
 package com.example.HomeLoan.service;
 
 import java.util.List;
+import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,11 @@ public class SavingAccountService {
 	public List<SavingAccount> findAccountByUserId(int id) {
 		return SavAccRepo.findSavingAccountByUser(id);
 	}
+	public List<SavingAccount> getAccDetails(Integer user_id) {
+
+		return SavAccRepo.findSavingAccByUserid(user_id);
+	}
+	
 
 	
 
