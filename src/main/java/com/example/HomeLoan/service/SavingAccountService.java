@@ -49,9 +49,9 @@ public class SavingAccountService {
 
 	
 
-	public SavingAccount findSavingAccountById(Long accountNo, Users users) {
+	public SavingAccount findBysequenceIdAndUser(int i, Users users) {
 	
-		return SavAccRepo.findByAccountnoAndUser(accountNo, users);
+		return SavAccRepo.findBysequenceIdAndUser(i, users);
 	}
 
 
