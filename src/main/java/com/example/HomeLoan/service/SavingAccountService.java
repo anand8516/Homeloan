@@ -2,9 +2,13 @@ package com.example.HomeLoan.service;
 
 import java.util.List;
 import java.util.Optional;
+<<<<<<< HEAD
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
+=======
+
+>>>>>>> 43bc7d142b33f7976266caf02719cd4d8ae4aa10
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +43,11 @@ public class SavingAccountService {
 	public List<SavingAccount> findAccountByUserId(int id) {
 		return SavAccRepo.findSavingAccountByUser(id);
 	}
+	public List<SavingAccount> getAccDetails(Integer user_id) {
+
+		return SavAccRepo.findSavingAccByUserid(user_id);
+	}
+	
 
 	
 
