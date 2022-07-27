@@ -9,12 +9,14 @@ import javax.servlet.http.HttpSession;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.HomeLoan.model.SavingAccount;
 import com.example.HomeLoan.model.Users;
 import com.example.HomeLoan.repo.SavingAccountRepositiory;
 import com.example.HomeLoan.repo.UserRepository;
+import com.example.HomeLoan.service.LoanAccountService;
 
 @Service
 public class SavingAccountService {
@@ -41,7 +43,7 @@ public class SavingAccountService {
 	public List<SavingAccount> findAccountByUserId(int id) {
 		return SavAccRepo.findSavingAccountByUser(id);
 	}
-	public List<SavingAccount> getAccDetails(Integer user_id) {
+	public ResponseEntity<?> getAccDetails(Integer user_id) {
 
 		return SavAccRepo.findSavingAccByUserid(user_id);
 	}
@@ -53,6 +55,10 @@ public class SavingAccountService {
 	
 		return SavAccRepo.findByAccountnoAndUser(accountNo, users);
 	}
+
+	
+
+	
 
 
 }

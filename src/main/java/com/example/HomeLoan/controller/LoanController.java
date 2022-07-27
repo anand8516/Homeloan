@@ -57,12 +57,14 @@ public class LoanController {
 	@Autowired
 	private UserRepository userRepository;
 	
+
 	@RequestMapping(value = "/applyLoan", produces = "application/json", 
 	  		  method = {RequestMethod.GET, RequestMethod.PUT})
-	public List<SavingAccount> getAccdetails(HttpSession session)
+	public ResponseEntity<?> getAccdetails(HttpSession session)
 	{
 		int user_id = (int) session.getAttribute("user_id");
-		return savingAccountService.getAccDetails(user_id);
+		return new ResponseEntity<>(savingAccountService.getAccDetails(user_id), HttpStatus.OK);
+		//return savingAccountService.getAccDetails(user_id);
 	}
 	
 	@RequestMapping(value = {"/applyLoan","/approveLoan"}, method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE })
