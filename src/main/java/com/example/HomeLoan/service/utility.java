@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,8 @@ import java.time.ZoneId;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,7 +38,8 @@ public class utility {
 		return DATE_FORMAT.format(date);	
 	}
 	
-	public Date addMonths(Date date,int months) {		
+	public Date addMonths(Date date,int months)
+	{		
 		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 		String s = DATE_FORMAT.format(date);	
 		LocalDate localdate = LocalDate.parse(s);
@@ -43,18 +48,15 @@ public class utility {
 		Date date_new = Date.from(newDate.atStartOfDay(ZoneId.systemDefault()).toInstant());		
 		return date_new;	    
 	}
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response) {
+	
+    public ResponseEntity<?> sessionCheck(HttpSession session) {
         // your code
-		String user_id = request.getRequestedSessionId();
-		if(user_id == null) {
-			try {
-				response.sendRedirect("/loginUser");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-	       
+		Map<String, Object> body = new LinkedHashMap<>();
+		if (session.getAttribute("user_id") == null) {
+			body.put("ERROR","Please login");
+			return new ResponseEntity<>(body, HttpStatus.METHOD_NOT_ALLOWED);
 		}
+		return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
