@@ -31,7 +31,7 @@ public class LoginController {
 	UserService userService;
 	
 	@PostMapping(value="/Users")
-	public ResponseEntity<Object> createUser(@Valid @RequestBody Users user) {
+	public ResponseEntity<?> createUser(@Valid @RequestBody Users user) {
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put("user_obj", userService.createUser(user));
 		return new ResponseEntity<>(body, HttpStatus.CREATED);	
@@ -39,41 +39,41 @@ public class LoginController {
 		
 	
 	@GetMapping(value = "api/getuser/{userId}")
-	public ResponseEntity<Object> getUser(@Valid @PathVariable int userId) {
+	public ResponseEntity<?> getUser(@Valid @PathVariable int userId) {
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put("user_obj",userService.getUser(userId));
 		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/login")
-	public ResponseEntity<String> loginUser(@RequestBody AuthenticationDetails authenticationDetails, HttpSession session){
+	public ResponseEntity<?> loginUser(@RequestBody AuthenticationDetails authenticationDetails, HttpSession session){
 		Map<String, Object> body = new LinkedHashMap<>();
 		return new ResponseEntity<>(userService.login(authenticationDetails, session), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/login")
-	public ResponseEntity<String> loginUser(){
+	public ResponseEntity<?> loginUser(){
 		return new ResponseEntity<>("Welcome to Barclays Bank", HttpStatus.OK);
 		
 	}
 	
 	
 	@PutMapping(value="/Users/{userId}")
-	public ResponseEntity<String> updateUser(@Valid @RequestBody Users user) {
+	public ResponseEntity<?> updateUser(@Valid @RequestBody Users user) {
 		userService.updateUser(user);
 		return new ResponseEntity<>("User details updated succesfully", HttpStatus.OK);
 		
 	}
 	
 	@DeleteMapping(value = "Delete/{userId}")
-	public ResponseEntity<String> deleteUser(@Valid @PathVariable Integer userId)
+	public ResponseEntity<?> deleteUser(@Valid @PathVariable Integer userId)
 	
 	{	
 		userService.deleteUser(userId);
 		return new ResponseEntity<>("User details deleted succesfully", HttpStatus.NO_CONTENT);
 	}
 	@GetMapping(value = "/allUser")
-	public ResponseEntity<List<Users>>  getAllUser() {
+	public ResponseEntity<?>  getAllUser() {
 		return new ResponseEntity<>(userService.getAllUser(), HttpStatus.OK);
 		
 	}
