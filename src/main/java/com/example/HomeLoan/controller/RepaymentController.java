@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.HomeLoan.model.Repayment;
 import com.example.HomeLoan.service.LoanRepaymentService;
 import com.example.HomeLoan.service.RepaymentService;
+import com.example.HomeLoan.service.utility;
 
 
 
@@ -31,8 +32,13 @@ public class RepaymentController {
 @Autowired
 private LoanRepaymentService repaymentService;
 
+	@Autowired
+	private utility util;
+
     @PutMapping("/foreclosure/{loanAccId}")   
-    public ResponseEntity<?> foreclosure(@PathVariable int loanAccId){    	    
+    public ResponseEntity<?> foreclosure(@PathVariable int loanAccId,HttpSession session){  
+		if(util.sessionCheck(session).getStatusCodeValue()==405)
+			return new ResponseEntity<>("please login!", HttpStatus.METHOD_NOT_ALLOWED);
     	Map<String, Object> body = new LinkedHashMap<>();
 		body.put("loanScheduleObject", repaymentService.updateRepayment(loanAccId));
 		return new ResponseEntity<>(body, HttpStatus.OK);
