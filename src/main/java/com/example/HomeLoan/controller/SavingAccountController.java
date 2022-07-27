@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.HomeLoan.model.SavingAccount;
@@ -32,7 +34,13 @@ public class SavingAccountController {
 	    return service.findAccountByUserId(user);	
 	}
 	
-	
+	@RequestMapping(value = "/applyLoan/{user_id}", produces = "application/json", 
+	  		  method = {RequestMethod.GET, RequestMethod.PUT})
+		public java.util.List<SavingAccount> getAccdetails(@PathVariable int user_id , HttpSession session)
+		{
+			//return this.LoanAccountService.getAccdetails(Integer.parseInt(user_id));
+	  	return this.service.getAccDetails(user_id);
+		}
 	
 	
 	

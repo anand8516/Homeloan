@@ -43,6 +43,7 @@ public class SavingAccount {
 	@JoinColumn(name = "user_id",referencedColumnName = "user_id")
 	private Users user;
 	
+	
 	@Column(name="curr_balance")
 	private Double balance;
 
