@@ -1,4 +1,4 @@
-package exception;
+package com.example.HomeLoan.exception;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -18,7 +18,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
-@ControllerAdvice(basePackages = "com.example.HomeLoan")
+@ControllerAdvice()
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@Override
