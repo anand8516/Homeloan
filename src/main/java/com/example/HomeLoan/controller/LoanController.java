@@ -3,6 +3,7 @@ package com.example.HomeLoan.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -55,6 +56,14 @@ public class LoanController {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@RequestMapping(value = "/applyLoan", produces = "application/json", 
+	  		  method = {RequestMethod.GET, RequestMethod.PUT})
+	public List<SavingAccount> getAccdetails(HttpSession session)
+	{
+		int user_id = (int) session.getAttribute("user_id");
+		return savingAccountService.getAccDetails(user_id);
+	}
 	
 	@RequestMapping(value = {"/applyLoan","/approveLoan"}, method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
