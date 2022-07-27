@@ -19,7 +19,7 @@ import com.example.HomeLoan.model.AuthenticationDetails;
 import com.example.HomeLoan.model.Users;
 import com.example.HomeLoan.service.UserService;
 
-
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class LoginController {
@@ -39,11 +39,16 @@ public class LoginController {
 		return userService.getUser(userId);
 	}
 	
-	@GetMapping(value = "api/loginUser")
-	public String loginUser(@RequestBody AuthenticationDetails authenticationDetails){
-		
-		return userService.login(authenticationDetails);
+	@PostMapping(value = "/login")
+	public String loginUser(@RequestBody AuthenticationDetails authenticationDetails, HttpSession session){
+		return userService.login(authenticationDetails, session);
 	}
+	
+	@GetMapping(value = "/login")
+	public String loginUser(){
+		return "Welcome to Barclays Bank";
+	}
+	
 	
 	@PutMapping(value="/Users/{userId}")
 	public void updateUser(@Valid @RequestBody Users user) {

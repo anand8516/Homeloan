@@ -45,6 +45,41 @@ public class LoanRepaymentService {
 	public List<Repayment> getLoanSchedulebyID(int LoanId) {		
 		return loanRepaymentRepo.findRepaymentDetailsByAccountNo(LoanId);
 	}
+	
+	public String updateRepayment(int LoanId) {		
+		
+		List<Repayment> existingPayment = loanRepaymentRepo.findRepaymentDetailsByAccountNo(LoanId);
+//		int count = 0;
+		int count = 0;		
+		for (Repayment product : existingPayment) {			
+			   if(product.getStatus() == "Paid") {
+				   ++count;
+			   } 			   	
+	        }
+		
+		logger.info("-----------"+count+"-----------------");	
+		if(count>=3) {									
+		   
+		   logger.info("----------------------------");		   
+		   
+		   for (Repayment product : existingPayment) {
+			   product.setOutstanding(0.0);
+			   product.setStatus("Closed");
+			   product.setPrinciple(0.0);
+			   product.setInterest(0.0);
+			   loanRepaymentRepo.save(product);
+			   logger.info("-----------Upated-----------------");	
+	        }
+	     
+	       return "Successfylly updated";
+	   }
+		else
+		{
+		return "Paid EMIs is less than 3 months";
+		}
+		
+//		return existingPayment;
+	}
 		
 	public double calInterest(double outstanding,double mothlyRateOfInterest) {		
 		return outstanding * mothlyRateOfInterest;
@@ -65,7 +100,6 @@ public class LoanRepaymentService {
 		String s = DATE_FORMAT.format(date);	
 		LocalDate localdate = LocalDate.parse(s);
 		LocalDate newDate = localdate.plusMonths(months); 		
-		System.out.println("New Date : "+newDate);
 		Date date_new = Date.from(newDate.atStartOfDay(ZoneId.systemDefault()).toInstant());		
 		return date_new;	    
 	}

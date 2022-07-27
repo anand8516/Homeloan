@@ -30,7 +30,7 @@ public class SavingAccountController {
 	}
 	
 	@GetMapping (value="/SavingAccount/UserById/{user}")
-	public SavingAccount findSavingAccountByUserid (@PathVariable int user, HttpSession session) {
+	public java.util.List<SavingAccount> findSavingAccountByUserid (@PathVariable int user, HttpSession session) {
 	    return service.findAccountByUserId(user);	
 	}
 	

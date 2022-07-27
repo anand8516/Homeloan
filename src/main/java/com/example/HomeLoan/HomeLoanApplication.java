@@ -4,7 +4,11 @@ package com.example.HomeLoan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+
+import com.example.HomeLoan.service.LoanRepaymentService;
+import com.example.HomeLoan.service.RepaymentService;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 
 import java.util.Date;
 
@@ -21,7 +25,12 @@ public class HomeLoanApplication {
         logger.info("Info log InSIde Home APP");
 		SpringApplication.run(HomeLoanApplication.class, args);
 
+//		updateRepayment
+//		LoanRepaymentService obj =  new LoanRepaymentService();
+//		obj.generateRepaymentSchedule(new Date(),5000000, 7,20,0);
 
-		
+		LoanRepaymentService obj1 =  new LoanRepaymentService();
+		obj1.updateRepayment(1);
+
 	}
 }

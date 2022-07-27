@@ -1,7 +1,10 @@
 package com.example.HomeLoan.service;
 
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Optional;
+=======
+>>>>>>> 99a4d62c95ad322c30edd4be034c65000044e42d
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,14 +23,25 @@ public class SavingAccountService {
 		return SavAccRepo.save(bal);	
 	}
 	
-	public SavingAccount findAccountByUserId(int id) {
-		return SavAccRepo.findSavingAccountByUserid(id);
+	public List<SavingAccount> findAccountByUserId(int id) {
+		return SavAccRepo.findSavingAccountByUser(id);
 	}
 	public List<SavingAccount> getAccDetails(Integer user_id) {
 
+<<<<<<< HEAD
 		return SavAccRepo.findSavingAccByUserid(user_id);
 	}
 	
+=======
+	
+
+	public SavingAccount findSavingAccountById(Long accountNo, Users users) {
+	
+		return SavAccRepo.findByAccountnoAndUser(accountNo, users);
+	}
+
+
+>>>>>>> 99a4d62c95ad322c30edd4be034c65000044e42d
 	//Count of rows code
 	//public SavingAccount getAccountno(int id) {
 	//	String count=(String) SavAccRepo.countofSA(userid);
