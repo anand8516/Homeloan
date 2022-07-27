@@ -21,8 +21,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "loan_account")
-@AllArgsConstructor
-@NoArgsConstructor
+/*@AllArgsConstructor
+@NoArgsConstructor*/
 public class LoanAccount {
 	
 	@Id
