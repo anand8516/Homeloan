@@ -48,8 +48,6 @@ public class LoanRepaymentService {
 		return loanaccountRepo.findAll();
 	}
 
-
-
 	public LoanAccount getLoanAccountById(int id) {
 //		LoanAccount LoanAccountdetails = loanaccountRepo.findById(LoanId);
 		return loanaccountRepo.findByLoanAccId(id);

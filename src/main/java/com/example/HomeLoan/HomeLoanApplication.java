@@ -25,11 +25,5 @@ public class HomeLoanApplication {
         logger.info("Info log InSIde Home APP");
 		SpringApplication.run(HomeLoanApplication.class, args);
 
-//		updateRepayment
-//		LoanRepaymentService obj =  new LoanRepaymentService();
-//		obj.generateRepaymentSchedule(new Date(),5000000, 7,20,0);
-
-
-
 	}
 }

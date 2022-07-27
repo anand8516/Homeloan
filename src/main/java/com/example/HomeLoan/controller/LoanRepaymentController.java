@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,22 +39,28 @@ public class LoanRepaymentController {
 	private LoanAccountService loanAccountService;
 
 	@GetMapping(value = "/loanscheduler")
-	public List<LoanAccount> findLoandetais(HttpSession session) {
-		return loanservice.getLoanAccounts();
+	public ResponseEntity<?> findLoandetais(HttpSession session) {		
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("loanScheduleObject",  loanservice.getLoanAccounts());
+		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/loanscheduler/{id}/")
-	public List<Repayment> findLoanSchedulebyID(@PathVariable int id) {
-		return loanservice.getLoanSchedulebyID(id);
+	public ResponseEntity<?> findLoanSchedulebyID(@Valid @PathVariable int id) {
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("loanScheduleObject",  loanservice.getLoanSchedulebyID(id));
+		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/loanndetails/{id}/")
-	public LoanAccount findLoandetaisbyID(@PathVariable int id,HttpSession session) {
-		return loanservice.getLoanAccountById(id);
+	public ResponseEntity<?> findLoandetaisbyID(@Valid @PathVariable int id,HttpSession session) {			
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("loanDetailsObject",  loanservice.getLoanAccountById(id));
+		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 
 	@PostMapping("/loanndetails/csvexport/{loanid}")
-    public void exportToCSV(@PathVariable int loanid,HttpServletResponse response) throws IOException {
+    public void exportToCSV(@Valid @PathVariable int loanid,HttpServletResponse response) throws IOException {
         response.setContentType("text/csv");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         String currentDateTime = dateFormatter.format(new Date());
