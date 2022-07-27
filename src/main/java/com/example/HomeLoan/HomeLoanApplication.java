@@ -21,7 +21,7 @@ public class HomeLoanApplication {
 	
 	private static final Logger logger = LogManager.getLogger(HomeLoanApplication.class);
 	public static void main(String[] args) {
-							
+
         logger.info("Info log InSIde Home APP");
 		SpringApplication.run(HomeLoanApplication.class, args);
 
