@@ -33,8 +33,15 @@ public class LoanAccount {
 
 	@Column(name = "saving_acc_no")
 	@NotNull(message = "please select saving account")
-	private long accountNo;
+	private int accountNo;
 	
+	@Override
+	public String toString() {
+		return "LoanAccount [loanAccId=" + loanAccId + ", accountNo=" + accountNo + ", amount=" + amount
+				+ ", interestRate=" + interestRate + ", salary=" + salary + ", year=" + year + ", month=" + month
+				+ ", description=" + description + ", status=" + status + ", file=" + file + "]";
+	}
+
 	@NotNull(message = "please fill loan_amount")
 	@Column(name="loan_amount")
 	private Double amount;
@@ -63,7 +70,6 @@ public class LoanAccount {
 	private String status;
 	
 	@Column
-	
 	private String file;
 
 	
@@ -73,7 +79,7 @@ public class LoanAccount {
 	}
 
 
-	public LoanAccount(Integer loanAccId, long accountNo, Double amount, Double interestRate, Double salary, int year,
+	public LoanAccount(Integer loanAccId, int accountNo, Double amount, Double interestRate, Double salary, int year,
 			int month, String description, String status, String file) {
 		super();
 		this.loanAccId = loanAccId;
@@ -97,11 +103,11 @@ public class LoanAccount {
 		this.loanAccId = loanAccId;
 	}
 
-	public long getAccountNo() {
+	public int getAccountNo() {
 		return accountNo;
 	}
 
-	public void setAccountNo(long string) {
+	public void setAccountNo(int string) {
 		this.accountNo = string;
 	}
 

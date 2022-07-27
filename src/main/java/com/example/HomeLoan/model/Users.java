@@ -81,6 +81,18 @@ public class Users {
 	public void setPhone(long phone) {
 		this.phone = phone;
 	}
+	
+	public Users(int userId, String password, String email, long phone) {
+		// TODO Auto-generated constructor stub
+		this.userId = userId;
+		this.password = password;
+		this.email = email;
+		this.phone = phone;
+	}
+
+	public Users() {
+		// TODO Auto-generated constructor stub
+	}
 
 
 	

@@ -208,6 +208,7 @@ public class LoanRepaymentService {
 		}
 
 
+
 	}
 
 	public String emiPayment(int loanaccountno, int user_id) {
@@ -251,6 +252,8 @@ public class LoanRepaymentService {
 
 
 	}
+
+
 }
 
 
