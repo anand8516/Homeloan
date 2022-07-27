@@ -7,9 +7,13 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.HomeLoan.model.SavingAccount;
+import com.example.HomeLoan.repo.SavingAccountRepositiory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 

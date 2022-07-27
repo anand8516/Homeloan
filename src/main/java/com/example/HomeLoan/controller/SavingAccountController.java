@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
-=======
+
 import org.springframework.web.bind.annotation.RequestMethod;
->>>>>>> 43bc7d142b33f7976266caf02719cd4d8ae4aa10
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.HomeLoan.model.SavingAccount;

@@ -30,7 +30,7 @@ import com.example.HomeLoan.service.LoanRepaymentService;
 @RestController
 public class LoanRepaymentController {
 
-	@Autowired
+
 	@Autowired
 	private LoanRepaymentService loanservice;
 
