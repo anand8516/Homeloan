@@ -58,8 +58,7 @@ public class LoginController {
 	@DeleteMapping(value = "Delete/{userId}")
 	public String deleteUser(@Valid @PathVariable Integer userId)
 	
-	{
-		
+	{	
 		userService.deleteUser(userId);
 		return "deleted";
 	}

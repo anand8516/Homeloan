@@ -34,8 +34,7 @@ public class LoanRepaymentService {
 	public List<LoanAccount> getLoanAccounts() {
 		return loanaccountRepo.findAll();		
 	}
-	
-	
+		
 	
 	public LoanAccount getLoanAccountById(int id) {
 //		LoanAccount LoanAccountdetails = loanaccountRepo.findById(LoanId);		
