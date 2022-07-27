@@ -38,7 +38,6 @@ public class SavingAccountService {
 	}
 
 
->>>>>>> 99a4d62c95ad322c30edd4be034c65000044e42d
 	//Count of rows code
 	//public SavingAccount getAccountno(int id) {
 	//	String count=(String) SavAccRepo.countofSA(userid);
