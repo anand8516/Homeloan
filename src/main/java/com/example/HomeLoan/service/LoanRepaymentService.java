@@ -118,7 +118,7 @@ public class LoanRepaymentService {
 		for(int i=0;i<t;i++){
 			double mInterest = pesObj.calInterest(outstanding,r) ;//rate is monthly //= outstanding * r;			
 			double paidPrinciple = pesObj.calPaidPrinciple(emi,mInterest);//emi - mInterest;			
-			outstanding = outstanding - emi;				
+			outstanding = outstanding - paidPrinciple;				
 
 			Repayment obj = new Repayment();
 			int monthly_inc = 1 ;
