@@ -59,6 +59,7 @@ public class LoanController {
 	@Autowired
 	private UserRepository userRepository;
 	
+
 	@Autowired
 	private utility util;
 
@@ -69,6 +70,7 @@ public class LoanController {
 		util.sessionCheck(session);
 		int user_id = (int) session.getAttribute("user_id");
 		return new ResponseEntity<>(savingAccountService.getAccDetails(user_id), HttpStatus.OK);
+
 	}
 	
 	@RequestMapping(value = {"/applyLoan","/approveLoan"}, method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE })

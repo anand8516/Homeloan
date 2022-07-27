@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import com.example.HomeLoan.model.LoanAccount;
@@ -19,8 +20,7 @@ public interface SavingAccountRepositiory extends JpaRepository<SavingAccount, I
 	// SavingAccount findbyUser(Users user);
 	
 	@Query(value="SELECT r FROM SavingAccount r WHERE r.user.userId = :userid")
-		//Optional<SavingAccount> findById(@Param("userid") Integer user_id);	
-		List<SavingAccount> findSavingAccByUserid(int userid);
+		ResponseEntity<List<SavingAccount>> findSavingAccByUserid(int userid);
 
 
 	@Query("SELECT a FROM SavingAccount a WHERE a.user.userId = :userid")
