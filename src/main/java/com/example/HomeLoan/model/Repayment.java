@@ -41,6 +41,8 @@ public class Repayment {
 	
 	@Column(name="status")
 	private String status;
+
+
 	
 
 	@Column(name="updated_at")

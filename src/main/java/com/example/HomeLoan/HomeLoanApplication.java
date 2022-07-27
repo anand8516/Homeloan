@@ -21,16 +21,9 @@ public class HomeLoanApplication {
 	
 	private static final Logger logger = LogManager.getLogger(HomeLoanApplication.class);
 	public static void main(String[] args) {
-							
+
         logger.info("Info log InSIde Home APP");
 		SpringApplication.run(HomeLoanApplication.class, args);
-
-//		updateRepayment
-//		LoanRepaymentService obj =  new LoanRepaymentService();
-//		obj.generateRepaymentSchedule(new Date(),5000000, 7,20,0);
-
-//		LoanRepaymentService obj1 =  new LoanRepaymentService();
-//		obj1.updateRepayment(1);
 
 	}
 }

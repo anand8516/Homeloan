@@ -1,6 +1,8 @@
-package exception;
+package com.example.HomeLoan.exception;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -8,12 +10,15 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation. ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-@ControllerAdvice
+
+
+@ControllerAdvice()
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@Override
@@ -34,4 +39,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<Object> (body, status);
 
 	}
+	
+    @Override
+    protected ResponseEntity<Object> 
+          handleHttpMessageNotReadable(HttpMessageNotReadableException ex, 
+          HttpHeaders headers, HttpStatus status, WebRequest request) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Required request body is missing");
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }
+
+

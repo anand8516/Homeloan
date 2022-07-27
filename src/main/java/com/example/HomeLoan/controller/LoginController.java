@@ -1,11 +1,15 @@
 package com.example.HomeLoan.controller;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,48 +31,52 @@ public class LoginController {
 	UserService userService;
 	
 	@PostMapping(value="/Users")
-	public Users createUser(@Valid @RequestBody Users user) {
-		
-		return userService.createUser(user);
+	public ResponseEntity<Object> createUser(@Valid @RequestBody Users user) {
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("user_obj", userService.createUser(user));
+		return new ResponseEntity<>(body, HttpStatus.CREATED);	
 	}
 		
 	
 	@GetMapping(value = "api/getuser/{userId}")
-	public Optional<Users> getUser(@Valid @PathVariable int userId) {
-		
-		return userService.getUser(userId);
+	public ResponseEntity<Object> getUser(@Valid @PathVariable int userId) {
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("user_obj",userService.getUser(userId));
+		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/login")
-	public String loginUser(@RequestBody AuthenticationDetails authenticationDetails, HttpSession session){
-		return userService.login(authenticationDetails, session);
+	public ResponseEntity<String> loginUser(@RequestBody AuthenticationDetails authenticationDetails, HttpSession session){
+		Map<String, Object> body = new LinkedHashMap<>();
+		return new ResponseEntity<>(userService.login(authenticationDetails, session), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/login")
-	public String loginUser(){
-		return "Welcome to Barclays Bank";
+	public ResponseEntity<String> loginUser(){
+		return new ResponseEntity<>("Welcome to Barclays Bank", HttpStatus.OK);
+		
 	}
 	
 	
 	@PutMapping(value="/Users/{userId}")
-	public void updateUser(@Valid @RequestBody Users user) {
+	public ResponseEntity<String> updateUser(@Valid @RequestBody Users user) {
 		userService.updateUser(user);
+		return new ResponseEntity<>("User details updated succesfully", HttpStatus.OK);
+		
 	}
 	
 	@DeleteMapping(value = "Delete/{userId}")
-	public String deleteUser(@Valid @PathVariable Integer userId)
+	public ResponseEntity<String> deleteUser(@Valid @PathVariable Integer userId)
 	
 	{	
 		userService.deleteUser(userId);
-		return "deleted";
+		return new ResponseEntity<>("User details deleted succesfully", HttpStatus.NO_CONTENT);
 	}
 	@GetMapping(value = "/allUser")
-	public List<Users> getAllUser() {
-		return userService.getAllUser();
+	public ResponseEntity<List<Users>>  getAllUser() {
+		return new ResponseEntity<>(userService.getAllUser(), HttpStatus.OK);		
 	}
-	{
-		
-	}
+
 
 
 }

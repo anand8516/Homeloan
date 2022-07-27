@@ -18,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -41,7 +42,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = RegisterControllerTest.class)
+//@WebMvcTest(value = RegisterControllerTest.class)
+@WebMvcTest(value = RegisterControllerTest.class,  excludeAutoConfiguration = {SecurityAutoConfiguration.class})
 public class RegisterControllerTest {	
     
 	@Autowired
@@ -86,27 +88,27 @@ public class RegisterControllerTest {
 //        When findAll called then ready with records (No DB calls) 
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/api/v1/allUser")
-//                .contentType(MediaType.APPLICATION_JSON))
-        		.accept(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON))
+//        		.accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()) //200
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$[0].email", is("user1@gmail.com")));
     }
     
     
-//    @Test
-//    public void getLoanRepayment_success() throws Exception {
-//    	 
-//        mockMvc.perform(MockMvcRequestBuilders
-//                .get("/api/v1/loanndetails/csvexport/1/")
-////                .contentType(MediaType.APPLICATION_JSON))
-//        		.accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk()) //200
+    @Test
+    public void getLoanRepayment_success() throws Exception {
+    	 
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/api/v1/loanndetails/1/")
+//                .contentType(MediaType.APPLICATION_JSON))
+        		.accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()) //200
 //                .andExpect(jsonPath("$", hasSize(3)))
-////                .andExpect(jsonPath("$[0].email", is("user1@gmail.com")))
-//                ;
-//                
-//    }
+//                .andExpect(jsonPath("$[0].email", is("user1@gmail.com")))
+                ;
+                
+    }
     
 
 }

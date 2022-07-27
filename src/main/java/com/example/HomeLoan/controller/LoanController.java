@@ -3,11 +3,13 @@ package com.example.HomeLoan.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +42,7 @@ import com.example.HomeLoan.service.SavingAccountService;
 
 @RequestMapping("/loan")
 @RestController
+@Validated
 public class LoanController {
 	
 	private static final Logger logger = LogManager.getLogger(LoanController.class);
@@ -53,9 +57,17 @@ public class LoanController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@RequestMapping(value = "/applyLoan", produces = "application/json", 
+	  		  method = {RequestMethod.GET, RequestMethod.PUT})
+	public List<SavingAccount> getAccdetails(HttpSession session)
+	{
+		int user_id = (int) session.getAttribute("user_id");
+		return savingAccountService.getAccDetails(user_id);
+	}
+	
 	@RequestMapping(value = {"/applyLoan","/approveLoan"}, method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
-	public ResponseEntity<Object> applyForLoan(@RequestBody LoanAccount loanAcc,HttpSession session) {
+	public ResponseEntity<Object> applyForLoan(@RequestBody @Valid  LoanAccount loanAcc,HttpSession session) {
 		int user_id = (int) session.getAttribute("user_id");
 		logger.info("createLoanAccount applyForLoan> "+loanAcc);
 		Map<String, Object> body = new LinkedHashMap<>();
