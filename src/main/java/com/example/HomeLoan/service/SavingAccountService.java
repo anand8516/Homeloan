@@ -1,5 +1,7 @@
 package com.example.HomeLoan.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +19,17 @@ public class SavingAccountService {
 		return SavAccRepo.save(bal);	
 	}
 	
-	public SavingAccount findAccountByUserId(int id) {
-		return SavAccRepo.findSavingAccountByUserid(id);
+	public List<SavingAccount> findAccountByUserId(int id) {
+		return SavAccRepo.findSavingAccountByUser(id);
 	}
+
+	
+
+	public SavingAccount findSavingAccountById(Long accountNo, Users users) {
+	
+		return SavAccRepo.findByAccountnoAndUser(accountNo, users);
+	}
+
 
 	//Count of rows code
 	//public SavingAccount getAccountno(int id) {

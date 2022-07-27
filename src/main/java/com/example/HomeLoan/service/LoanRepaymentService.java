@@ -65,7 +65,6 @@ public class LoanRepaymentService {
 		String s = DATE_FORMAT.format(date);	
 		LocalDate localdate = LocalDate.parse(s);
 		LocalDate newDate = localdate.plusMonths(months); 		
-		System.out.println("New Date : "+newDate);
 		Date date_new = Date.from(newDate.atStartOfDay(ZoneId.systemDefault()).toInstant());		
 		return date_new;	    
 	}
