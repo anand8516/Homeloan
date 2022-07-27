@@ -1,7 +1,11 @@
 package com.example.HomeLoan.service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +19,7 @@ import com.example.HomeLoan.controller.LoanController;
 import com.example.HomeLoan.model.LoanAccount;
 import com.example.HomeLoan.model.Repayment;
 import com.example.HomeLoan.model.SavingAccount;
+import com.example.HomeLoan.model.Users;
 import com.example.HomeLoan.repo.LoanAccountRepository;
 import com.example.HomeLoan.repo.RepaymentRepository;
 import com.example.HomeLoan.repo.SavingAccountRepositiory;
@@ -40,8 +45,14 @@ public class LoanAccountService {
 	@Autowired
 	private LoanRepaymentService loanPayService;
 	
+	@Autowired
+	private UserService userService;
+	
 	private final int batchSize = 30;
 	
+	@Autowired
+	private EmailService emailService;
+
 	
 	public LoanAccount saveAppliedLoan( LoanAccount obj) {
 
@@ -65,10 +76,17 @@ public class LoanAccountService {
 	public LoanAccount createLoanAccount(LoanAccount loanAcc, int user_id) {
 		SavingAccount userAccount = savingAccRepo.findByAccountno(loanAcc.getAccountNo());
 		logger.info("createLoanAccount service> "+loanAcc.getAccountNo());
-		loanAcc.setAccountNo(userAccount.getAccountno());
+		loanAcc.setAccountNo(userAccount.getSequenceId());
 		loanAcc.setStatus("Approved");
 		loanAcc = loanAccrepo.save(loanAcc);
-		populatePaymentDBforNewUser(loanAcc);
+		Users user = userService.getUser(user_id).get();
+		try {
+			emailService.sendEmail(user.getEmail(), "Congrats, Your Loan has been Approoved", "Loan Accepted", "batchpb2a@gmail.com");
+			populatePaymentDBforNewUser(loanAcc);
+		} catch (UnsupportedEncodingException | MessagingException e) {
+
+			e.printStackTrace();
+		}
 		return loanAcc;
 		
 	}

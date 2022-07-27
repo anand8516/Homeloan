@@ -1,9 +1,15 @@
 package com.example.HomeLoan.service;
 
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 
@@ -37,5 +43,19 @@ public class utility {
 		Date date_new = Date.from(newDate.atStartOfDay(ZoneId.systemDefault()).toInstant());		
 		return date_new;	    
 	}
-	 
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response) {
+        // your code
+		String user_id = request.getRequestedSessionId();
+		if(user_id == null) {
+			try {
+				response.sendRedirect("/loginUser");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+	       
+		}
+
+    }
+
 }
