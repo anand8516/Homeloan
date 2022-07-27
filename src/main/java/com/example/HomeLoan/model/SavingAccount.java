@@ -36,7 +36,7 @@ public class SavingAccount {
 	// public acc no 
 	@Column(name="acc_no", unique = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long accountno;
+	private String accountno;
 
 	// one user can have multiple account
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -54,11 +54,11 @@ public class SavingAccount {
 		this.sequenceId = sequenceId;
 	}
 
-	public Long getAccountno() {
+	public String getAccountno() {
 		return accountno;
 	}
 
-	public void setAccountno(Long accountno) {
+	public void setAccountno(String accountno) {
 		this.accountno = accountno;
 	}
 

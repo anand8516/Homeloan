@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,24 +30,32 @@ public class LoanAccount {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer loanAccId;
 	
+
 	@Column(name = "saving_acc_no")
-	private Long accountNo;
+	@NotNull(message = "please select saving account")
+	private long accountNo;
 	
+	@NotNull(message = "please fill loan_amount")
 	@Column(name="loan_amount")
 	private Double amount;
 	
+	@NotNull(message = "please fill interest rate")
 	@Column(name="interest_rate")
 	private Double interestRate;
 	
+	@NotNull(message = "please fill salary")
 	@Column(name="salary")
 	private Double salary;
 	
+	@NotNull(message = "please fill year")
 	@Column(name="year")
 	private int year; 
 	
+	@NotNull(message = "please fill month")
 	@Column(name="month")
 	private int month; 
 	
+	@NotBlank(message = "please fill address")
 	@Lob  //Large Objects
 	private String description;
 	
@@ -63,7 +73,7 @@ public class LoanAccount {
 	}
 
 
-	public LoanAccount(Integer loanAccId, Long accountNo, Double amount, Double interestRate, Double salary, int year,
+	public LoanAccount(Integer loanAccId, long accountNo, Double amount, Double interestRate, Double salary, int year,
 			int month, String description, String status, String file) {
 		super();
 		this.loanAccId = loanAccId;
@@ -87,12 +97,12 @@ public class LoanAccount {
 		this.loanAccId = loanAccId;
 	}
 
-	public Long getAccountNo() {
+	public long getAccountNo() {
 		return accountNo;
 	}
 
-	public void setAccountNo(Long accountNo) {
-		this.accountNo = accountNo;
+	public void setAccountNo(long string) {
+		this.accountNo = string;
 	}
 
 	public Double getAmount() {
