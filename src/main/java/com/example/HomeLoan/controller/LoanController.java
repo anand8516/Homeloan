@@ -40,6 +40,7 @@ import com.example.HomeLoan.repo.SavingAccountRepositiory;
 import com.example.HomeLoan.repo.UserRepository;
 import com.example.HomeLoan.service.LoanAccountService;
 import com.example.HomeLoan.service.SavingAccountService;
+import com.example.HomeLoan.service.utility;
 
 @RequestMapping("/loan")
 @RestController
@@ -58,15 +59,14 @@ public class LoanController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private utility util;
+	
 	@RequestMapping(value = "/applyLoan", produces = "application/json", 
 	  		  method = {RequestMethod.GET, RequestMethod.PUT})
 	public ResponseEntity<?> getAccdetails(HttpSession session)
 	{
-		Map<String, Object> body = new LinkedHashMap<>();
-		if (session.getAttribute("user_id") == null) {
-			body.put("ERROR","Please login");
-			return new ResponseEntity<>(new ArrayList<SavingAccount>() , HttpStatus.METHOD_NOT_ALLOWED);
-		}
+		util.sessionCheck(session);
 		int user_id = (int) session.getAttribute("user_id");
 		return new ResponseEntity<>(savingAccountService.getAccDetails(user_id), HttpStatus.OK);
 	}
@@ -75,13 +75,9 @@ public class LoanController {
 	@ResponseBody
 	public ResponseEntity<?> applyForLoan(@RequestBody @Valid  LoanAccount loanAcc ,HttpSession session) {
 		logger.info(loanAcc.getAccountNo());
-		Map<String, Object> body = new LinkedHashMap<>();
-		if (session.getAttribute("user_id") == null) {
-			body.put("ERROR","Please login");
-			return new ResponseEntity<>(body, HttpStatus.METHOD_NOT_ALLOWED);
-		}
+		util.sessionCheck(session);
 		int user_id = (int) session.getAttribute("user_id");
-
+		Map<String, Object> body = new LinkedHashMap<>();
 		logger.info("createLoanAccount applyForLoan> "+loanAcc);
 		
 		double salary  = loanAcc.getSalary();
@@ -108,6 +104,7 @@ public class LoanController {
 	@RequestMapping(value = {"/viewloan/{loan_id}"}, method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public ResponseEntity<?> viewForLoan(@PathVariable int loan_id,HttpSession session) {
+		util.sessionCheck(session);
 		int user_id = (int) session.getAttribute("user_id");
 		Map<String, Object> body = new LinkedHashMap<>();
 		LoanAccount loanAcc = loanAccService.getLoanDetails(loan_id);
