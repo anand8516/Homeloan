@@ -39,21 +39,21 @@ public class LoanRepaymentController {
 	private LoanAccountService loanAccountService;
 
 	@GetMapping(value = "/loanscheduler")
-	public ResponseEntity<Object> findLoandetais(HttpSession session) {		
+	public ResponseEntity<?> findLoandetais(HttpSession session) {		
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put("loanScheduleObject",  loanservice.getLoanAccounts());
 		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/loanscheduler/{id}/")
-	public ResponseEntity<Object> findLoanSchedulebyID(@Valid @PathVariable int id) {
+	public ResponseEntity<?> findLoanSchedulebyID(@Valid @PathVariable int id) {
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put("loanScheduleObject",  loanservice.getLoanSchedulebyID(id));
 		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/loanndetails/{id}/")
-	public ResponseEntity<Object> findLoandetaisbyID(@Valid @PathVariable int id,HttpSession session) {			
+	public ResponseEntity<?> findLoandetaisbyID(@Valid @PathVariable int id,HttpSession session) {			
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put("loanDetailsObject",  loanservice.getLoanAccountById(id));
 		return new ResponseEntity<>(body, HttpStatus.OK);
