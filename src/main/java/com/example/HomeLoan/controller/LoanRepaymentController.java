@@ -96,5 +96,36 @@ public class LoanRepaymentController {
         csvWriter.close();
 
     }
+    @PostMapping("/prepayment/{loanaccountno}")
+    public ResponseEntity<? >  updateEMIDetails(@PathVariable int loanaccountno,@RequestBody Double partialPaymentAmount,HttpSession session) {
+
+        int user_id = (int) session.getAttribute("user_id");
+        try {
+
+            return new ResponseEntity<>( loanservice.updateEMIDetails(loanaccountno,partialPaymentAmount,user_id), HttpStatus.OK);
+        }
+        catch(Exception e){
+
+            return new ResponseEntity<>("Error occurred during prepayment", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @PutMapping("/emipayment/{loanaccountno}")
+    public ResponseEntity<?> updateMonthlyEMIPayment(@PathVariable int loanaccountno,HttpSession session)
+    {
+        System.out.println("hit");
+        int user_id = (int) session.getAttribute("user_id");
+        //return loanservice.emiPayment(loanaccountno,user_id)
+        try {
+
+            return new ResponseEntity<>(loanservice.emiPayment(loanaccountno,user_id) , HttpStatus.OK);
+        }
+        catch(Exception e){
+
+            return new ResponseEntity<>("Error occurred during prepayment", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 
 }

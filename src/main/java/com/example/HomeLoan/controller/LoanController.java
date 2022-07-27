@@ -59,10 +59,11 @@ public class LoanController {
 	@Autowired
 	private UserRepository userRepository;
 	
+
 	@Autowired
 	private utility util;
-	
-	@RequestMapping(value = "/applyLoan", produces = "application/json", 
+
+	@RequestMapping(value = "/applyLoan", produces = "application/json",
 	  		  method = {RequestMethod.GET, RequestMethod.PUT})
 	public ResponseEntity<?> getAccdetails(HttpSession session)
 	{
@@ -70,6 +71,7 @@ public class LoanController {
 			return new ResponseEntity<>("please login!", HttpStatus.METHOD_NOT_ALLOWED);
 		int user_id = (int) session.getAttribute("user_id");
 		return new ResponseEntity<>(savingAccountService.getAccDetails(user_id), HttpStatus.OK);
+
 	}
 	
 	@RequestMapping(value = {"/applyLoan","/approveLoan"}, method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE })
@@ -81,7 +83,7 @@ public class LoanController {
 		int user_id = (int) session.getAttribute("user_id");
 		Map<String, Object> body = new LinkedHashMap<>();
 		logger.info("createLoanAccount applyForLoan> "+loanAcc);
-		
+
 		double salary  = loanAcc.getSalary();
 		double loanAmt  = loanAcc.getAmount();
 
