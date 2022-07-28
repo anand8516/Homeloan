@@ -164,13 +164,13 @@ public class LoanRepaymentService {
 		LoanRepaymentService pesObj = new LoanRepaymentService();
 
 		LocalDate currentDate = LocalDate.now();
-		int paidmonthscount = jdbcTemplate.queryForObject("select COUNT(*) from repayment where loan_account_id=? and status='paid'", new Object[]{loanaccountno}, Integer.class);
+		int paidmonthscount = jdbcTemplate.queryForObject("select COUNT(*) from repayment where loan_account_id=? and date<=? and status='paid'", new Object[]{loanaccountno,currentDate}, Integer.class);
 		logger.info("count" + paidmonthscount);
 		logger.info("date" + currentDate);
 		if (paidmonthscount >= 3) {
 
-			String currentmonthemi = "select date,interest,principle,outstanding,emi from repayment where loan_account_id = ?  and status='paid' and date <= ? order by date DESC limit 1";
-			Repayment repayment = (Repayment) jdbcTemplate.queryForObject(currentmonthemi, new Object[]{loanaccountno, currentDate},
+			String currentmonthemi = "select date,interest,principle,outstanding,emi from repayment where loan_account_id = ?  and status='paid' order by date DESC limit 1";
+			Repayment repayment = (Repayment) jdbcTemplate.queryForObject(currentmonthemi, new Object[]{loanaccountno},
 					new BeanPropertyRowMapper(Repayment.class));
 
 			System.out.println(repayment);
@@ -213,11 +213,17 @@ public class LoanRepaymentService {
 	public String emiPayment(int loanaccountno, int user_id) {
 
 		LoanAccount loanAccount = loanaccountRepo.findByLoanAccId(loanaccountno);
-		long saving_acc_no = loanAccount.getAccountNo();
+		int saving_acc_no = loanAccount.getAccountNo();
 		Users user = userService.getUser(user_id).get();
 
 		logger.info("saving accountno:" + saving_acc_no);
+<<<<<<< HEAD
 		SavingAccount userAccount = savingAccRepo.findBysequenceId(loanAccount.getAccountNo());
+=======
+//logger.info("loanAccount"+loanAccount.getAccountNo());
+		logger.info("loanAccount"+loanAccount.getLoanAccId());
+		SavingAccount userAccount = savingAccRepo.findBysequenceId(loanAccount.getLoanAccId());
+>>>>>>> f1efb30fc6d8b10af8e342dbdd6a0c8eceaf4ab7
 		logger.info("useraccount" + userAccount);
 		Double currentBalance = userAccount.getBalance();
 

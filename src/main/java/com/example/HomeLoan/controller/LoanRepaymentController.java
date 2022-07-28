@@ -117,6 +117,7 @@ public class LoanRepaymentController {
         System.out.println("hit");
         int user_id = (int) session.getAttribute("user_id");
         return loanservice.emiPayment(loanaccountno,user_id);
+<<<<<<< HEAD
 //        try {
 //
 //            return new ResponseEntity<>(loanservice.emiPayment(loanaccountno,user_id) , HttpStatus.OK);
@@ -125,6 +126,16 @@ public class LoanRepaymentController {
 //
 //            return new ResponseEntity<>("Error occurred during prepayment", HttpStatus.INTERNAL_SERVER_ERROR);
 //        }
+=======
+        /*try {
+
+            return new ResponseEntity<>(loanservice.emiPayment(loanaccountno,user_id) , HttpStatus.OK);
+        }
+        catch(Exception e){
+
+            return new ResponseEntity<>("Error occurred during prepayment", HttpStatus.INTERNAL_SERVER_ERROR);
+        }*/
+>>>>>>> f1efb30fc6d8b10af8e342dbdd6a0c8eceaf4ab7
 
     }
 
