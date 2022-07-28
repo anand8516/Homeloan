@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.HomeLoan.model.Repayment;
 import com.example.HomeLoan.service.LoanRepaymentService;
-import com.example.HomeLoan.service.RepaymentService;
+
 import com.example.HomeLoan.service.utility;
 
 

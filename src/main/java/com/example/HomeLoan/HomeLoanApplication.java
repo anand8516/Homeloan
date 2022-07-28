@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 import com.example.HomeLoan.service.LoanRepaymentService;
-import com.example.HomeLoan.service.RepaymentService;
+
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 

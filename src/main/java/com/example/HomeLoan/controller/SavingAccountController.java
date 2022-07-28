@@ -29,26 +29,14 @@ import com.example.HomeLoan.service.utility;
 public class SavingAccountController {
 	@Autowired
 	private SavingAccountService service;
-<<<<<<< HEAD
+
 	
 	@Autowired
 	private utility util;
 	
-	@PostMapping (value="/createSavingAccout")
-	public SavingAccount createSavingAccount(@RequestBody SavingAccount SavingAccountobj, HttpSession session) {
-		util.sessionCheck(session);
-		return service.saveBalance(SavingAccountobj,session);
-	}
-	
-	@GetMapping (value="/UserById/{user}")
-	public java.util.List<SavingAccount> findSavingAccountByUserid (@PathVariable int user, HttpSession session) {
-		util.sessionCheck(session);
-	    return service.findAccountByUserId(user);	
-=======
-
 
 	@PostMapping(value = "/createSavingAccout")
-	public ResponseEntity<Object> createSavingAccount(@RequestBody SavingAccount SavingAccountobj, HttpSession session) {
+	public ResponseEntity<?> createSavingAccount(@RequestBody SavingAccount SavingAccountobj, HttpSession session) {
 		try {
 			Map<String, Object> body = new LinkedHashMap<>();
 			return new ResponseEntity<>(service.saveBalance(SavingAccountobj, session), HttpStatus.OK);
@@ -61,7 +49,7 @@ public class SavingAccountController {
 	}
 
 	@GetMapping(value = "/UserById/{user}")
-	public ResponseEntity<Object> findSavingAccountByUserid(@PathVariable int user, HttpSession session) {
+	public ResponseEntity<?> findSavingAccountByUserid(@PathVariable int user, HttpSession session) {
 
 		try {
 			Map<String, Object> body = new LinkedHashMap<>();
@@ -71,13 +59,13 @@ public class SavingAccountController {
 			return new ResponseEntity<>("Error occurred during fetching saving account", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
->>>>>>> 18d56642f5cfedfbc254390e89d683641f84f00b
+
 	}
 
 	@RequestMapping(value = "/applyLoan/{user_id}", produces = "application/json",
 			method = {RequestMethod.GET, RequestMethod.PUT})
 
-	public ResponseEntity<Object> getAccdetails(@PathVariable int user_id, HttpSession session) {
+	public ResponseEntity<?> getAccdetails(@PathVariable int user_id, HttpSession session) {
 
 
 		try {

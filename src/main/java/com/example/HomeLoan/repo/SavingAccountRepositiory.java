@@ -20,7 +20,7 @@ public interface SavingAccountRepositiory extends JpaRepository<SavingAccount, I
 	// SavingAccount findbyUser(Users user);
 	
 	@Query(value="SELECT r FROM SavingAccount r WHERE r.user.userId = :userid")
-		ResponseEntity<List<SavingAccount>> findSavingAccByUserid(int userid);
+	List<SavingAccount> findSavingAccByUserid(int userid);
 
 
 	@Query("SELECT a FROM SavingAccount a WHERE a.user.userId = :userid")

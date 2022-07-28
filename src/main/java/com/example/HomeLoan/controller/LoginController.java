@@ -23,12 +23,20 @@ import com.example.HomeLoan.model.AuthenticationDetails;
 import com.example.HomeLoan.model.Users;
 import com.example.HomeLoan.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
 public class LoginController {
 	@Autowired	
 	UserService userService;
+	
+	
+	@GetMapping(value="/")
+	public ResponseEntity<?> home() {
+		return new ResponseEntity<>("Welcome to Barclays bank", HttpStatus.CREATED);	
+	}
+	
 	
 	@PostMapping(value="/Users")
 	public ResponseEntity<?> createUser(@Valid @RequestBody Users user) {
@@ -53,8 +61,13 @@ public class LoginController {
 	
 	@GetMapping(value = "/login")
 	public ResponseEntity<?> loginUser(){
-		return new ResponseEntity<>("Welcome to Barclays Bank", HttpStatus.OK);
+		return new ResponseEntity<>("Welcome to Barclays Bank login", HttpStatus.OK);
 		
+	}
+	@PostMapping("/logout")
+	public ResponseEntity<?>  destroySession(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return new ResponseEntity<>("logout", HttpStatus.OK);
 	}
 	
 	

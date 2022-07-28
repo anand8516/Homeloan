@@ -73,7 +73,8 @@ public class LoanRepaymentService {
 //		int count = 0;
 		int count = 0;
 		for (Repayment product : existingPayment) {
-			if (product.getStatus() == "Paid") {
+			logger.info(product.getStatus());
+			if (product.getStatus().equalsIgnoreCase("paid")) {
 				++count;
 			}
 		}
@@ -85,9 +86,7 @@ public class LoanRepaymentService {
 
 			for (Repayment product : existingPayment) {
 				product.setOutstanding(0.0);
-				product.setStatus("Closed");
-				product.setPrinciple(0.0);
-				product.setInterest(0.0);
+				product.setStatus("paid");
 				loanRepaymentRepo.save(product);
 				logger.info("-----------Upated-----------------");
 			}
@@ -192,8 +191,8 @@ public class LoanRepaymentService {
 				Date new_date = pesObj.addMonths(emiDate, monthly_inc + i);
 				logger.info("new date:" + new_date);
 
-				String updateSQL = "update repayment set emi=?,interest=?,outstanding=?,principle=? where date=? and loan_account_id=? and status!='paid'";
-				jdbcTemplate.update(updateSQL, newemi, updatedInterest, balance, updatedPrinciple, new_date, loanaccountno);
+				String updateSQL = "update repayment set emi=?,interest=?,outstanding=?,principle=? where date=now() and loan_account_id=? and status!='paid'";
+				jdbcTemplate.update(updateSQL, newemi, updatedInterest, balance, updatedPrinciple, loanaccountno);
 			}
 			try {
 				emailService.sendEmail(user.getEmail(), "Congrats, Prepayment done", "prepayment done", "batchpb2a@gmail.com");
@@ -218,7 +217,7 @@ public class LoanRepaymentService {
 		Users user = userService.getUser(user_id).get();
 
 		logger.info("saving accountno:" + saving_acc_no);
-		SavingAccount userAccount = savingAccRepo.findByAccountno(saving_acc_no);
+		SavingAccount userAccount = savingAccRepo.findBysequenceId(loanAccount.getAccountNo());
 		logger.info("useraccount" + userAccount);
 		Double currentBalance = userAccount.getBalance();
 
@@ -226,14 +225,15 @@ public class LoanRepaymentService {
 		String currentmonthemi = "select id as repaymentid,date,interest,principle,outstanding,emi from repayment where loan_account_id = ?  and status='Pending' order by date ASC limit 1";
 		Repayment repayment = (Repayment) jdbcTemplate.queryForObject(currentmonthemi, new Object[]{loanaccountno},
 				new BeanPropertyRowMapper(Repayment.class));
-		logger.info("repayment" + repayment);
+		logger.info("repayment" + repayment.getRepaymentid());
+		logger.info("loan acc id" + loanAccount.getLoanAccId());
 		if (currentBalance > repayment.getEmi()) {
 			Double balanceafterDeduction = currentBalance - repayment.getEmi();
 			int repayId = repayment.getRepaymentid();
 
-			jdbcTemplate.update("update repayment set status='paid' where loan_account_id=? and id=?", loanaccountno, repayId);
-			jdbcTemplate.update("update savingaccount set curr_balance=? where acc_no=?", balanceafterDeduction, saving_acc_no);
-			logger.info("EMI deducted");
+			jdbcTemplate.update(" update repayment set status='paid' where loan_account_id=? and id=? and updated_at = now() ", loanAccount.getLoanAccId(), repayId);
+			jdbcTemplate.update("update savingaccount set curr_balance=? where acc_no=?", balanceafterDeduction, userAccount.getAccountno());
+		
 			try {
 				emailService.sendEmail(user.getEmail(), "Congrats, Your monthly EMI deducted", "EMI deducted", "batchpb2a@gmail.com");
 

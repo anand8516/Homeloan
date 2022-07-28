@@ -81,7 +81,7 @@ public class LoanAccountService {
 		loanAcc = loanAccrepo.save(loanAcc);
 		Users user = userService.getUser(user_id).get();
 		try {
-			emailService.sendEmail(user.getEmail(), "Congrats, Your Loan has been Approoved", "Loan Accepted", "batchpb2a@gmail.com");
+			emailService.sendEmail(user.getEmail(), "Congrats, Your Loan has been Approoved\n Your Accounnt id:"+loanAcc.getLoanAccId(), "Loan Accepted", "batchpb2a@gmail.com");
 			populatePaymentDBforNewUser(loanAcc);
 		} catch (UnsupportedEncodingException | MessagingException e) {
 

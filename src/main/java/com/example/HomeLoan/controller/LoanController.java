@@ -70,6 +70,8 @@ public class LoanController {
 		if(util.sessionCheck(session).getStatusCodeValue()==405)
 			return new ResponseEntity<>("please login!", HttpStatus.METHOD_NOT_ALLOWED);
 		int user_id = (int) session.getAttribute("user_id");
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("prefilled details Acc", savingAccountService.getAccDetails(user_id));
 		return new ResponseEntity<>(savingAccountService.getAccDetails(user_id), HttpStatus.OK);
 
 	}
