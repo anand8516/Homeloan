@@ -27,6 +27,7 @@ import org.supercsv.prefs.CsvPreference;
 import com.example.HomeLoan.model.LoanAccount;
 import com.example.HomeLoan.model.Repayment;
 import com.example.HomeLoan.service.LoanRepaymentService;
+import com.example.HomeLoan.service.utility;
 
 @RestController
 public class LoanRepaymentController {
@@ -37,30 +38,41 @@ public class LoanRepaymentController {
 
 	@Autowired
 	private LoanAccountService loanAccountService;
+	
+	@Autowired
+	private utility util;
 
 	@GetMapping(value = "/loanscheduler")
-	public ResponseEntity<?> findLoandetais(HttpSession session) {		
+	public ResponseEntity<?> findLoandetais(HttpSession session) {
+		if(util.sessionCheck(session).getStatusCodeValue()==405)
+			return new ResponseEntity<>("please login!", HttpStatus.METHOD_NOT_ALLOWED);
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put("loanScheduleObject",  loanservice.getLoanAccounts());
 		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/loanscheduler/{id}/")
-	public ResponseEntity<?> findLoanSchedulebyID(@Valid @PathVariable int id) {
+	public ResponseEntity<?> findLoanSchedulebyID(@Valid @PathVariable int id,HttpSession session) {
+		if(util.sessionCheck(session).getStatusCodeValue()==405)
+			return new ResponseEntity<>("please login!", HttpStatus.METHOD_NOT_ALLOWED);
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put("loanScheduleObject",  loanservice.getLoanSchedulebyID(id));
 		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/loanndetails/{id}/")
-	public ResponseEntity<?> findLoandetaisbyID(@Valid @PathVariable int id,HttpSession session) {			
+	public ResponseEntity<?> findLoandetaisbyID(@Valid @PathVariable int id,HttpSession session) {	
+		if(util.sessionCheck(session).getStatusCodeValue()==405)
+			return new ResponseEntity<>("please login!", HttpStatus.METHOD_NOT_ALLOWED);
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put("loanDetailsObject",  loanservice.getLoanAccountById(id));
 		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 
 	@PostMapping("/loanndetails/csvexport/{loanid}")
-    public void exportToCSV(@Valid @PathVariable int loanid,HttpServletResponse response) throws IOException {
+    public void exportToCSV(@Valid @PathVariable int loanid,HttpServletResponse response,HttpSession session) throws IOException {
+		if(util.sessionCheck(session).getStatusCodeValue()==405)
+			return;
         response.setContentType("text/csv");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         String currentDateTime = dateFormatter.format(new Date());

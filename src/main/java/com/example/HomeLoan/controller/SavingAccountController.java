@@ -22,12 +22,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.HomeLoan.model.SavingAccount;
 import com.example.HomeLoan.service.SavingAccountService;
+import com.example.HomeLoan.service.utility;
 
 @RestController
 @RequestMapping("/SavingAccount")
 public class SavingAccountController {
 	@Autowired
 	private SavingAccountService service;
+<<<<<<< HEAD
+	
+	@Autowired
+	private utility util;
+	
+	@PostMapping (value="/createSavingAccout")
+	public SavingAccount createSavingAccount(@RequestBody SavingAccount SavingAccountobj, HttpSession session) {
+		util.sessionCheck(session);
+		return service.saveBalance(SavingAccountobj,session);
+	}
+	
+	@GetMapping (value="/UserById/{user}")
+	public java.util.List<SavingAccount> findSavingAccountByUserid (@PathVariable int user, HttpSession session) {
+		util.sessionCheck(session);
+	    return service.findAccountByUserId(user);	
+=======
 
 
 	@PostMapping(value = "/createSavingAccout")
@@ -54,6 +71,7 @@ public class SavingAccountController {
 			return new ResponseEntity<>("Error occurred during fetching saving account", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
+>>>>>>> 18d56642f5cfedfbc254390e89d683641f84f00b
 	}
 
 	@RequestMapping(value = "/applyLoan/{user_id}", produces = "application/json",

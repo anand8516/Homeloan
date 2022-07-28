@@ -67,7 +67,8 @@ public class LoanController {
 	  		  method = {RequestMethod.GET, RequestMethod.PUT})
 	public ResponseEntity<?> getAccdetails(HttpSession session)
 	{
-		util.sessionCheck(session);
+		if(util.sessionCheck(session).getStatusCodeValue()==405)
+			return new ResponseEntity<>("please login!", HttpStatus.METHOD_NOT_ALLOWED);
 		int user_id = (int) session.getAttribute("user_id");
 		return new ResponseEntity<>(savingAccountService.getAccDetails(user_id), HttpStatus.OK);
 
@@ -77,7 +78,8 @@ public class LoanController {
 	@ResponseBody
 	public ResponseEntity<?> applyForLoan(@RequestBody @Valid  LoanAccount loanAcc ,HttpSession session) {
 		logger.info(loanAcc.getAccountNo());
-		util.sessionCheck(session);
+		if(util.sessionCheck(session).getStatusCodeValue()==405)
+			return new ResponseEntity<>("please login!", HttpStatus.METHOD_NOT_ALLOWED);
 		int user_id = (int) session.getAttribute("user_id");
 		Map<String, Object> body = new LinkedHashMap<>();
 		logger.info("createLoanAccount applyForLoan> "+loanAcc);
@@ -106,7 +108,8 @@ public class LoanController {
 	@RequestMapping(value = {"/viewloan/{loan_id}"}, method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public ResponseEntity<?> viewForLoan(@PathVariable int loan_id,HttpSession session) {
-		util.sessionCheck(session);
+		if(util.sessionCheck(session).getStatusCodeValue()==405)
+			return new ResponseEntity<>("please login!", HttpStatus.METHOD_NOT_ALLOWED);
 		int user_id = (int) session.getAttribute("user_id");
 		Map<String, Object> body = new LinkedHashMap<>();
 		LoanAccount loanAcc = loanAccService.getLoanDetails(loan_id);
