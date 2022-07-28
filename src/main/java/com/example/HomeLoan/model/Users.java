@@ -24,8 +24,6 @@ import lombok.Setter;
 @Data
 @Entity
 @Table(name = "users")
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 public class Users {
